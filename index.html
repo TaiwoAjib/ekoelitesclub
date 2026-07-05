@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F7F3EA}
+body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F7F3EA">
+
+  <!-- HEADER -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
+    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+      <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+        <span style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+          <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
+        </span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px">
+        <a href="index.html" style="font-size:13.5px;font-weight:700;color:#E5C170;text-decoration:none;letter-spacing:0.05em;border-bottom:2px solid #C9A24B;padding-bottom:3px">Home</a>
+        <a href="about.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">About</a>
+        <a href="executives.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Executives</a>
+        <a href="gallery.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Gallery</a>
+        <a href="login.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Member Login</a>
+        <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:13.5px;padding:11px 22px;border-radius:999px;text-decoration:none;letter-spacing:0.04em" style-hover="background:#E5C170">Join the Club</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div data-screen-label="Hero" style="background:linear-gradient(160deg,#0B1526 0%,#10203A 60%,#0B1526 100%);color:#F7F3EA;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(201,162,75,0.14),transparent 70%)"></div>
+    <div style="max-width:1180px;margin:0 auto;padding:96px 32px 88px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:64px;align-items:center;position:relative">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:24px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+          <span style="font-size:13px;font-weight:800;letter-spacing:0.3em;color:#C9A24B">ÉKÒ ILÉ …GBA BE!</span>
+          <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        </div>
+        <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:58px;line-height:1.05;margin:0;letter-spacing:-0.01em;text-wrap:balance">The home of Lagos heritage in Indiana.</h1>
+        <p style="font-size:18px;line-height:1.65;color:#B9C4D6;margin:0;max-width:52ch;text-wrap:pretty">Eko Elites Club Inc. brings together sons and daughters of Lagos living in Indiana — to celebrate our culture, support one another, and give back to our communities at home and abroad.</p>
+        <div style="display:flex;gap:14px;margin-top:8px">
+          <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none" style-hover="background:#E5C170">Become a Member</a>
+          <a href="about.html" style="border:1.5px solid rgba(201,162,75,0.6);color:#E5C170;font-weight:700;font-size:15px;padding:15px 30px;border-radius:999px;text-decoration:none" style-hover="border-color:#E5C170;background:rgba(201,162,75,0.1)">Our Story</a>
+        </div>
+        <div style="font-size:13px;color:#7C8AA0;letter-spacing:0.12em;font-weight:600">EKO ONI BAJE — LAGOS WILL NOT SPOIL</div>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <div style="position:relative;display:flex;justify-content:center;align-items:center">
+          <div style="position:absolute;width:340px;height:340px;border:1px solid rgba(201,162,75,0.35);border-radius:50%"></div>
+          <div style="position:absolute;width:390px;height:390px;border:1px dashed rgba(201,162,75,0.2);border-radius:50%"></div>
+          <img src="images/logo.jpg" alt="Eko Elites Club Inc. crest" style="width:300px;height:300px;border-radius:50%;object-fit:cover;border:4px solid #C9A24B;box-shadow:0 24px 60px rgba(0,0,0,0.45);background:#ffffff"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <sc-if value="{{ showStats }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Stats" style="background:#0E1B31;border-top:1px solid rgba(201,162,75,0.35)">
+      <div style="max-width:1180px;margin:0 auto;padding:36px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+        <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center">
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:36px;color:#E5C170">{{ st.value }}</span>
+            <span style="font-size:12px;font-weight:700;letter-spacing:0.18em;color:#7C8AA0">{{ st.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ACTIVITIES -->
+  <div data-screen-label="Activities" style="max-width:1180px;margin:0 auto;padding:88px 32px 72px;width:100%;box-sizing:border-box">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;text-align:center">
+      <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">WHAT WE DO</span>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;margin:0;color:#0B1526">Culture, community, and care</h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:12px" style-hover="border-color:#C9A24B;box-shadow:0 12px 30px rgba(11,21,38,0.08)">
+        <span style="width:40px;height:40px;background:#0E1B31;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;margin:6px 0 8px 6px"><span style="transform:rotate(-45deg);color:#E5C170;font-weight:800;font-family:'Bricolage Grotesque',sans-serif">01</span></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Cultural celebrations</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#5B6577;margin:0;text-wrap:pretty">Eyo-inspired festivals, Lagos cultural days, and independence celebrations that keep Ékò traditions alive in the Midwest.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:12px" style-hover="border-color:#C9A24B;box-shadow:0 12px 30px rgba(11,21,38,0.08)">
+        <span style="width:40px;height:40px;background:#0E1B31;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;margin:6px 0 8px 6px"><span style="transform:rotate(-45deg);color:#E5C170;font-weight:800;font-family:'Bricolage Grotesque',sans-serif">02</span></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Community service</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#5B6577;margin:0;text-wrap:pretty">Outreach projects, charitable drives, and support for causes in Indiana and back home in Lagos State.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:12px" style-hover="border-color:#C9A24B;box-shadow:0 12px 30px rgba(11,21,38,0.08)">
+        <span style="width:40px;height:40px;background:#0E1B31;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;margin:6px 0 8px 6px"><span style="transform:rotate(-45deg);color:#E5C170;font-weight:800;font-family:'Bricolage Grotesque',sans-serif">03</span></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Member welfare</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#5B6577;margin:0;text-wrap:pretty">We stand with members through life's milestones and challenges — weddings, births, bereavements, and beyond.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:12px" style-hover="border-color:#C9A24B;box-shadow:0 12px 30px rgba(11,21,38,0.08)">
+        <span style="width:40px;height:40px;background:#0E1B31;transform:rotate(45deg);display:flex;align-items:center;justify-content:center;margin:6px 0 8px 6px"><span style="transform:rotate(-45deg);color:#E5C170;font-weight:800;font-family:'Bricolage Grotesque',sans-serif">04</span></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Networking &amp; growth</h3>
+        <p style="font-size:14.5px;line-height:1.6;color:#5B6577;margin:0;text-wrap:pretty">Professional connections, mentorship, and social gatherings that help Lagosians in Indiana thrive together.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXECUTIVES PREVIEW -->
+  <div data-screen-label="Executives preview" style="background:#ffffff;border-top:1px solid #E8E1D2;border-bottom:1px solid #E8E1D2">
+    <div style="max-width:1180px;margin:0 auto;padding:80px 32px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">LEADERSHIP</span>
+          <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;margin:0;color:#0B1526">The Executive Council</h2>
+        </div>
+        <a href="executives.html" style="font-size:14px;font-weight:800;color:#A9812F;text-decoration:none;letter-spacing:0.06em;border-bottom:2px solid #C9A24B;padding-bottom:3px;white-space:nowrap" style-hover="color:#0B1526">All 9 offices →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+        <sc-for list="{{ execPreview }}" as="o">
+          <div style="border:1px solid #E8E1D2;border-radius:14px;padding:28px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;background:#FBF9F3">
+            <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ o.photoStyle }}"></div>
+            </sc-if>
+            <sc-if value="{{ o.noPhoto }}" hint-placeholder-val="{{ true }}">
+              <span style="width:120px;height:120px;border-radius:50%;background:#0E1B31;border:3px solid #C9A24B;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;color:#E5C170">{{ o.initials }}</span>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:18px;color:#0B1526">{{ o.name }}</span>
+              <span style="font-size:11.5px;font-weight:800;letter-spacing:0.22em;color:#A9812F">{{ o.office }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY PREVIEW -->
+  <div data-screen-label="Gallery preview" style="max-width:1180px;margin:0 auto;padding:80px 32px;width:100%;box-sizing:border-box">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:44px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">MOMENTS</span>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;margin:0;color:#0B1526">From our gatherings</h2>
+      </div>
+      <a href="gallery.html" style="font-size:14px;font-weight:800;color:#A9812F;text-decoration:none;letter-spacing:0.06em;border-bottom:2px solid #C9A24B;padding-bottom:3px;white-space:nowrap" style-hover="color:#0B1526">Full gallery →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <sc-for list="{{ galleryPreview }}" as="g">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-if value="{{ g.hasPhoto }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ g.photoStyle }}"></div>
+          </sc-if>
+          <sc-if value="{{ g.noPhoto }}" hint-placeholder-val="{{ true }}">
+            <div style="width:100%;height:240px;border-radius:14px;background:linear-gradient(150deg,#0E1B31,#152848);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+              <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg)"></span>
+              <span style="font-size:11px;font-weight:800;letter-spacing:0.2em;color:#C9A24B">{{ g.tag }}</span>
+            </div>
+          </sc-if>
+          <span style="font-size:13px;font-weight:700;color:#5B6577;letter-spacing:0.08em">{{ g.titleUpper }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- JOIN CTA -->
+  <div data-screen-label="Join CTA" style="background:linear-gradient(150deg,#0B1526,#152848);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 20% 100%,rgba(201,162,75,0.16),transparent 70%)"></div>
+    <div style="max-width:1180px;margin:0 auto;padding:84px 32px;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;position:relative">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+      </div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:42px;margin:0;color:#F7F3EA;max-width:20ch;text-wrap:balance">Are you a son or daughter of Ékò in Indiana?</h2>
+      <p style="font-size:17px;line-height:1.6;color:#B9C4D6;margin:0;max-width:52ch;text-wrap:pretty">Join a family that celebrates where you come from and supports where you're going. Membership is open to Lagos indigenes and friends of Lagos.</p>
+      <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:16px;padding:16px 36px;border-radius:999px;text-decoration:none;margin-top:8px" style-hover="background:#E5C170">Apply for Membership</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B">
+    <div style="max-width:1180px;margin:0 auto;padding:56px 32px 0;display:grid;grid-template-columns:1.3fr 0.7fr 1fr;gap:48px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+        </div>
+        <p style="font-size:14px;line-height:1.65;margin:0;max-width:40ch;text-wrap:pretty">Ékò Ilé …Gba Be! A community of Lagos indigenes and friends in Indiana, USA — preserving culture, building bonds, giving back.</p>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.24em;color:#C9A24B">EKO ONI BAJE</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">EXPLORE</span>
+        <a href="about.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">About the club</a>
+        <a href="executives.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Executive council</a>
+        <a href="gallery.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Photo gallery</a>
+        <a href="register.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Become a member</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">CONTACT</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteEmail }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteLocation }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteMeeting }}</span>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:0 auto;padding:24px 32px;margin-top:44px;border-top:1px solid rgba(135,148,168,0.2);display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+      <span>© 2026 Eko Elites Club Inc. All rights reserved.</span>
+      <span style="display:flex;gap:18px;align-items:center"><a href="admin.html" style="color:#8794A8;text-decoration:none;font-weight:600" style-hover="color:#E5C170">Admin</a><span style="letter-spacing:0.12em">ÉKÒ ILÉ …GBA BE!</span></span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showStats&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Homepage&quot;}}">
+class Component extends DCLogic {
+  state = { data: null, photos: {} };
+
+  componentDidMount() {
+    import('./site-data.js').then(m => m.loadSiteData().then(data => {
+      const paths = []
+        .concat((data.executives || []).map(o => o.photo))
+        .concat((data.gallery || []).map(g => g.photo));
+      return m.probePhotos(paths).then(photos => this.setState({ data, photos }));
+    })).catch(() => {});
+  }
+
+  renderVals() {
+    const d = this.state.data || {};
+    const photos = this.state.photos;
+    const site = d.site || {};
+    const initials = (name) => (name || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || '?';
+    const execPreview = (d.executives || []).slice(0, 3).map(o => {
+      const has = !!(o.photo && photos[o.photo]);
+      return { ...o, hasPhoto: has, noPhoto: !has, initials: initials(o.name),
+        photoStyle: has ? { width: '120px', height: '120px', borderRadius: '50%', border: '3px solid #C9A24B', boxSizing: 'border-box', background: '#0E1B31 url("' + o.photo + '") center/cover no-repeat' } : null };
+    });
+    const galleryPreview = (d.gallery || []).slice(0, 3).map(g => {
+      const has = !!(g.photo && photos[g.photo]);
+      return { ...g, hasPhoto: has, noPhoto: !has, titleUpper: (g.title || '').toUpperCase(),
+        photoStyle: has ? { width: '100%', height: '240px', borderRadius: '14px', background: '#0E1B31 url("' + g.photo + '") center/cover no-repeat' } : null };
+    });
+    const stats = (Array.isArray(d.stats) && d.stats.length) ? d.stats : [
+      { value: '120+', label: 'ACTIVE MEMBERS' },
+      { value: '2018', label: 'ESTABLISHED' },
+      { value: '30+', label: 'EVENTS HOSTED' },
+      { value: '9', label: 'EXECUTIVE OFFICES' }
+    ];
+    return {
+      showStats: this.props.showStats ?? true,
+      stats,
+      execPreview,
+      galleryPreview,
+      siteEmail: site.email || 'info@ekoelitesclub.org',
+      siteLocation: site.location || 'Indianapolis, Indiana, USA',
+      siteMeeting: site.meeting || 'General meeting: first Sunday of every month'
+    };
+  }
+}
+</script>
+</body>
+</html>

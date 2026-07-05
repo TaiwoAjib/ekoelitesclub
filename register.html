@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F7F3EA}
+body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
+input,select{font-family:'Manrope',sans-serif}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F7F3EA">
+
+  <!-- HEADER -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
+    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+      <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+        <span style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+          <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
+        </span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px">
+        <a href="index.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Home</a>
+        <a href="about.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">About</a>
+        <a href="executives.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Executives</a>
+        <a href="gallery.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Gallery</a>
+        <a href="login.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Member Login</a>
+        <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:13.5px;padding:11px 22px;border-radius:999px;text-decoration:none;letter-spacing:0.04em" style-hover="background:#E5C170">Join the Club</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- SPLIT LAYOUT -->
+  <div data-screen-label="Registration" style="flex:1;display:grid;grid-template-columns:0.9fr 1.1fr">
+
+    <!-- LEFT PANEL -->
+    <div style="background:linear-gradient(170deg,#0B1526,#152848);color:#F7F3EA;padding:72px 56px;display:flex;flex-direction:column;gap:28px">
+      <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid #C9A24B;background:#ffffff"/>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;line-height:1.12;margin:0;max-width:16ch;text-wrap:balance">Join the Ékò family in Indiana.</h1>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg);margin-top:8px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#C9D4E6">A community that shows up for you — at celebrations and in hard times.</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg);margin-top:8px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#C9D4E6">Cultural festivals, monthly meetings, and owambes all year round.</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg);margin-top:8px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#C9D4E6">A voice in club decisions and a hand in projects back home in Lagos.</span>
+        </div>
+      </div>
+      <span style="font-size:12px;font-weight:800;letter-spacing:0.26em;color:#C9A24B;margin-top:auto">ÉKÒ ILÉ …GBA BE!</span>
+    </div>
+
+    <!-- FORM -->
+    <div style="padding:72px 64px;display:flex;flex-direction:column;gap:24px;max-width:560px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;margin:0;color:#0B1526">Membership application</h2>
+        <p style="font-size:14.5px;color:#5B6577;margin:0">Already a member? <a href="login.html" style="color:#A9812F;font-weight:700;text-decoration:none">Log in here</a>.</p>
+      </div>
+
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FBEDEA;border:1px solid #E3B3A8;color:#8C3B2A;font-size:14px;font-weight:600;padding:12px 16px;border-radius:10px">{{ error }}</div>
+      </sc-if>
+
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:18px">
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">FULL NAME</span>
+          <input name="name" required="required" placeholder="e.g. Adewale Balogun" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+        </label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">EMAIL</span>
+            <input name="email" type="email" required="required" placeholder="you@email.com" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">PHONE</span>
+            <input name="phone" type="tel" placeholder="(317) 555-0100" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+          </label>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">CITY, STATE</span>
+            <input name="city" placeholder="Indianapolis, IN" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">LAGOS CONNECTION</span>
+            <select name="connection" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none">
+              <option value="Indigene by birth">Indigene by birth</option>
+              <option value="Indigene by lineage">Indigene by lineage</option>
+              <option value="Spouse of indigene">Spouse of indigene</option>
+              <option value="Friend of Lagos">Friend of Lagos</option>
+            </select>
+          </label>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">PASSWORD</span>
+            <input name="password" type="password" required="required" placeholder="Min. 6 characters" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">CONFIRM PASSWORD</span>
+            <input name="confirm" type="password" required="required" placeholder="Repeat password" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#ffffff;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+          </label>
+        </div>
+        <button type="submit" style="background:#C9A24B;color:#0B1526;font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:15px;border-radius:999px;border:none;cursor:pointer;margin-top:6px" style-hover="background:#E5C170">Submit Application</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- FOOTER BAR -->
+  <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B">
+    <div style="max-width:1180px;margin:0 auto;padding:22px 32px;display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+      <span>© 2026 Eko Elites Club Inc. All rights reserved.</span>
+      <span style="letter-spacing:0.12em">EKO ONI BAJE</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { error: '', busy: false };
+
+  renderVals() {
+    return {
+      error: this.state.error,
+      submit: (e) => {
+        e.preventDefault();
+        if (this.state.busy) return;
+        const d = Object.fromEntries(new FormData(e.target));
+        if (!d.name.trim() || !d.email.trim()) { this.setState({ error: 'Please fill in your name and email.' }); return; }
+        if (d.password.length < 6) { this.setState({ error: 'Password must be at least 6 characters.' }); return; }
+        if (d.password !== d.confirm) { this.setState({ error: 'Passwords do not match.' }); return; }
+        const email = d.email.trim().toLowerCase();
+        this.setState({ busy: true, error: '' });
+        import('./neon-db.js').then(async (db) => {
+          await db.ensureTables();
+          const existing = await db.sql('SELECT email FROM members WHERE email = $1', [email]);
+          if (existing.rows.length) {
+            this.setState({ busy: false, error: 'An account with this email already exists. Try logging in.' });
+            return;
+          }
+          const hash = await db.sha256(d.password);
+          await db.sql(
+            'INSERT INTO members (email, name, phone, city, connection, pass_hash) VALUES ($1,$2,$3,$4,$5,$6)',
+            [email, d.name.trim(), d.phone.trim(), d.city.trim(), d.connection, hash]
+          );
+          localStorage.setItem('eec_session', email);
+          window.location.href = 'profile.html';
+        }).catch((err) => {
+          this.setState({ busy: false, error: 'Could not reach the membership database. Please try again. (' + err.message + ')' });
+        });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

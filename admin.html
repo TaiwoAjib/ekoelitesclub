@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#EFEADF}
+body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
+input,select,button,textarea{font-family:'Manrope',sans-serif}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#EFEADF">
+
+  <!-- ADMIN TOP BAR -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
+    <div style="max-width:1080px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;gap:14px">
+      <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+        <span style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;color:#F7F3EA;letter-spacing:0.04em">SITE ADMIN</span>
+          <span style="font-size:9.5px;color:#C9A24B;letter-spacing:0.24em;font-weight:700">EKO ELITES CLUB INC.</span>
+        </span>
+      </a>
+      <sc-if value="{{ authed }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}">
+          <span style="background:rgba(31,107,60,0.25);border:1px solid #3E8B5C;color:#8FD6AA;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px">Saved ✓</span>
+        </sc-if>
+        <a href="index.html" style="font-size:13px;font-weight:600;color:#C9D4E6;text-decoration:none" style-hover="color:#E5C170">View site</a>
+        <button onClick="{{ download }}" style="background:none;border:1.5px solid rgba(201,162,75,0.6);color:#E5C170;font-weight:700;font-size:13px;padding:9px 18px;border-radius:999px;cursor:pointer" style-hover="background:rgba(201,162,75,0.12)">Download data.json</button>
+        <button onClick="{{ save }}" style="background:#C9A24B;border:none;color:#0B1526;font-weight:800;font-size:13px;padding:10px 22px;border-radius:999px;cursor:pointer" style-hover="background:#E5C170">Save Changes</button>
+        <button onClick="{{ lock }}" title="Lock admin" style="background:none;border:1px solid rgba(135,148,168,0.4);color:#8794A8;font-weight:700;font-size:12px;padding:9px 14px;border-radius:999px;cursor:pointer" style-hover="color:#E5C170;border-color:#C9A24B">Lock</button>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- PASSCODE GATE -->
+  <sc-if value="{{ locked }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Admin gate" style="flex:1;display:flex;align-items:center;justify-content:center;padding:64px 32px">
+      <form onSubmit="{{ unlock }}" style="background:#ffffff;border:1px solid #E0D5BB;border-top:4px solid #C9A24B;border-radius:18px;padding:44px;width:360px;display:flex;flex-direction:column;gap:18px;text-align:center;align-items:stretch">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid #C9A24B;background:#ffffff;align-self:center"/>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:22px;margin:0;color:#0B1526">Admin access</h1>
+          <p style="font-size:13.5px;color:#5B6577;margin:0">Enter the admin passcode to edit site content.</p>
+        </div>
+        <sc-if value="{{ gateError }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FBEDEA;border:1px solid #E3B3A8;color:#8C3B2A;font-size:13px;font-weight:600;padding:10px 14px;border-radius:9px">{{ gateError }}</div>
+        </sc-if>
+        <input name="pass" type="password" placeholder="Passcode" style="border:1px solid #D8CEB8;border-radius:10px;padding:13px 16px;font-size:15px;background:#FBF9F3;color:#17202F;outline:none;text-align:center" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+        <button type="submit" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:14.5px;padding:13px;border-radius:999px;border:none;cursor:pointer" style-hover="background:#E5C170">Unlock</button>
+      </form>
+    </div>
+  </sc-if>
+
+  <!-- ADMIN PANELS -->
+  <sc-if value="{{ authed }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Admin panels" style="flex:1;width:100%">
+      <div style="max-width:1080px;margin:0 auto;padding:40px 32px 88px;display:flex;flex-direction:column;gap:26px;box-sizing:border-box">
+
+        <sc-if value="{{ noBridge }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#FDF3E0;border:1px solid #E4C98A;border-radius:12px;padding:16px 22px;font-size:14px;line-height:1.6;color:#7A5B1E"><strong>Database unreachable:</strong> edits can't be saved right now. Check your connection and try again, or use <strong>Download data.json</strong> as a backup of your changes.</div>
+        </sc-if>
+
+        <!-- CLUB INFO -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Club info</h2>
+            <p style="font-size:13.5px;color:#8794A8;margin:0">Shown in the footer of every page.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:11.5px;font-weight:800;letter-spacing:0.14em;color:#3A4456">CONTACT EMAIL</span>
+              <input value="{{ siteEmail }}" onChange="{{ setSiteEmail }}" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:11.5px;font-weight:800;letter-spacing:0.14em;color:#3A4456">LOCATION</span>
+              <input value="{{ siteLocation }}" onChange="{{ setSiteLocation }}" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;grid-column:1 / -1">
+              <span style="font-size:11.5px;font-weight:800;letter-spacing:0.14em;color:#3A4456">MEETING NOTE</span>
+              <input value="{{ siteMeeting }}" onChange="{{ setSiteMeeting }}" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+            </label>
+          </div>
+        </div>
+
+        <!-- STATS -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Homepage stats</h2>
+            <p style="font-size:13.5px;color:#8794A8;margin:0">The number band under the homepage hero.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ statRows }}" as="s" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:140px 1fr;gap:12px">
+                <input value="{{ s.value }}" onChange="{{ s.setValue }}" placeholder="120+" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ s.label }}" onChange="{{ s.setLabel }}" placeholder="ACTIVE MEMBERS" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none;letter-spacing:0.06em" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- EXECUTIVES -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Executive council</h2>
+            <p style="font-size:13.5px;color:#8794A8;margin:0">Names, duties, and portraits. Click <strong>Photo</strong> to prepare a portrait — a web-ready copy downloads with the correct filename; upload it to the <code>images/executives/</code> folder on your website.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ execRows }}" as="o">
+              <div style="display:grid;grid-template-columns:150px 170px 1fr 1.4fr;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ o.photoStyle }}"></div>
+                  </sc-if>
+                  <sc-if value="{{ o.noPhoto }}" hint-placeholder-val="{{ true }}">
+                    <span style="width:52px;height:52px;border-radius:50%;background:#0E1B31;border:2px solid #C9A24B;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;color:#E5C170;flex-shrink:0;box-sizing:border-box">{{ o.initials }}</span>
+                  </sc-if>
+                  <button onClick="{{ o.pickPhoto }}" style="background:none;border:1px solid #D8CEB8;color:#A9812F;font-weight:800;font-size:11.5px;padding:8px 12px;border-radius:999px;cursor:pointer" style-hover="border-color:#C9A24B;background:rgba(201,162,75,0.08)">Photo</button>
+                </div>
+                <span style="font-size:11px;font-weight:800;letter-spacing:0.16em;color:#A9812F">{{ o.office }}</span>
+                <input value="{{ o.name }}" onChange="{{ o.setName }}" placeholder="Full name" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ o.duty }}" onChange="{{ o.setDuty }}" placeholder="Role description" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:13.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- GALLERY -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Gallery events</h2>
+              <p style="font-size:13.5px;color:#8794A8;margin:0">Click <strong>Photo</strong> to prepare an event image — it downloads with the correct filename; upload it to <code>images/events/</code> on your website. Add or remove events below.</p>
+            </div>
+            <button onClick="{{ addEvent }}" style="background:#0B1526;color:#E5C170;font-weight:800;font-size:13px;padding:11px 20px;border-radius:999px;border:none;cursor:pointer;white-space:nowrap" style-hover="background:#152848">+ Add event</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ galRows }}" as="g">
+              <div style="display:grid;grid-template-columns:160px 1.2fr 0.8fr 0.8fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <sc-if value="{{ g.hasPhoto }}" hint-placeholder-val="{{ false }}">
+                    <div style="{{ g.photoStyle }}"></div>
+                  </sc-if>
+                  <sc-if value="{{ g.noPhoto }}" hint-placeholder-val="{{ true }}">
+                    <span style="width:76px;height:52px;border-radius:8px;background:linear-gradient(150deg,#0E1B31,#152848);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="width:8px;height:8px;background:#C9A24B;transform:rotate(45deg)"></span></span>
+                  </sc-if>
+                  <button onClick="{{ g.pickPhoto }}" style="background:none;border:1px solid #D8CEB8;color:#A9812F;font-weight:800;font-size:11.5px;padding:8px 12px;border-radius:999px;cursor:pointer" style-hover="border-color:#C9A24B;background:rgba(201,162,75,0.08)">Photo</button>
+                </div>
+                <input value="{{ g.title }}" onChange="{{ g.setTitle }}" placeholder="Event title" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ g.date }}" onChange="{{ g.setDate }}" placeholder="Month Year" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:13.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <select value="{{ g.cat }}" onChange="{{ g.setCat }}" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 12px;font-size:13.5px;background:#FBF9F3;color:#17202F;outline:none">
+                  <option value="Festivals">Festivals</option>
+                  <option value="Galas">Galas</option>
+                  <option value="Community">Community</option>
+                  <option value="Meetings">Meetings</option>
+                </select>
+                <button onClick="{{ g.remove }}" title="Remove event" style="background:none;border:1px solid #E3B3A8;color:#B3563F;font-weight:800;font-size:15px;width:36px;height:36px;border-radius:9px;cursor:pointer" style-hover="background:#FBEDEA">×</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- ACTIVITIES -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Upcoming activities</h2>
+              <p style="font-size:13.5px;color:#8794A8;margin:0">Shown on the member dashboard.</p>
+            </div>
+            <button onClick="{{ addActivity }}" style="background:#0B1526;color:#E5C170;font-weight:800;font-size:13px;padding:11px 20px;border-radius:999px;border:none;cursor:pointer;white-space:nowrap" style-hover="background:#152848">+ Add activity</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-for list="{{ actRows }}" as="a" hint-placeholder-count="3">
+              <div style="display:grid;grid-template-columns:70px 80px 1fr 1.4fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+                <input value="{{ a.day }}" onChange="{{ a.setDay }}" placeholder="02" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 10px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none;text-align:center" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ a.month }}" onChange="{{ a.setMonth }}" placeholder="AUG" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 10px;font-size:13.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none;text-align:center;letter-spacing:0.08em" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ a.title }}" onChange="{{ a.setTitle }}" placeholder="Event title" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <input value="{{ a.detail }}" onChange="{{ a.setDetail }}" placeholder="Details" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:13.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+                <button onClick="{{ a.remove }}" title="Remove activity" style="background:none;border:1px solid #E3B3A8;color:#B3563F;font-weight:800;font-size:15px;width:36px;height:36px;border-radius:9px;cursor:pointer" style-hover="background:#FBEDEA">×</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- MEMBERS -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Registered members</h2>
+              <p style="font-size:13.5px;color:#8794A8;margin:0">Applications submitted through the website, stored in the club database.</p>
+            </div>
+            <button onClick="{{ reloadMembers }}" style="background:none;border:1px solid #D8CEB8;color:#A9812F;font-weight:800;font-size:12px;padding:9px 16px;border-radius:999px;cursor:pointer;white-space:nowrap" style-hover="border-color:#C9A24B;background:rgba(201,162,75,0.08)">Refresh</button>
+          </div>
+          <sc-if value="{{ noMembers }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px;color:#8794A8;margin:0">No members have registered yet.</p>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ memberRows }}" as="m">
+              <div style="display:grid;grid-template-columns:1.2fr 1.4fr 0.9fr 0.9fr 0.7fr 36px;gap:12px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+                <span style="font-size:14px;font-weight:800;color:#0B1526">{{ m.name }}</span>
+                <span style="font-size:13px;color:#5B6577;overflow:hidden;text-overflow:ellipsis">{{ m.email }}</span>
+                <span style="font-size:13px;color:#5B6577">{{ m.phone }}</span>
+                <span style="font-size:13px;color:#5B6577">{{ m.city }}</span>
+                <span style="font-size:12.5px;color:#8794A8">{{ m.joined }}</span>
+                <button onClick="{{ m.remove }}" title="Remove member" style="background:none;border:1px solid #E3B3A8;color:#B3563F;font-weight:800;font-size:15px;width:36px;height:36px;border-radius:9px;cursor:pointer" style-hover="background:#FBEDEA">×</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- SECURITY -->
+        <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Admin passcode</h2>
+            <p style="font-size:13.5px;color:#8794A8;margin:0">Simple gate for this page — not real security. Anyone with the site files can read it.</p>
+          </div>
+          <input value="{{ passcode }}" onChange="{{ setPasscode }}" placeholder="Passcode" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none;max-width:280px" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
+        </div>
+
+        <p style="font-size:12.5px;color:#8794A8;margin:0;line-height:1.6;text-align:center">Text changes save straight to the club database when you click <strong>Save Changes</strong>. Photos still download to your computer — upload them to the <code>images/</code> folders on your website.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- FOOTER BAR -->
+  <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B;margin-top:auto">
+    <div style="max-width:1080px;margin:0 auto;padding:20px 32px;display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+      <span>© 2026 Eko Elites Club Inc. — Admin</span>
+      <a href="index.html" style="color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Back to site</a>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { authed: false, data: null, saved: false, gateError: '', canWrite: true, photos: {}, previews: {}, members: [] };
+
+  _loadMembers() {
+    import('./neon-db.js').then(async (db) => {
+      await db.ensureTables();
+      const r = await db.sql('SELECT email, name, phone, city, connection, joined FROM members ORDER BY joined DESC, name');
+      this.setState({ members: r.rows || [] });
+    }).catch(() => {});
+  }
+
+  componentDidMount() {
+    import('./site-data.js').then(m => {
+      this._sd = m;
+      this.setState({ canWrite: m.canSave() });
+      return m.loadSiteData().then(data => {
+        const paths = []
+          .concat((data.executives || []).map(o => o.photo))
+          .concat((data.gallery || []).map(g => g.photo));
+        return m.probePhotos(paths).then(photos => {
+          this.setState({ data, photos, authed: sessionStorage.getItem('eec_admin') === '1' });
+          this._loadMembers();
+        });
+      });
+    }).catch(() => {});
+  }
+
+  // Resize to max 1200px, encode as JPEG, download it with the right
+  // filename, remember a local preview, and record the path via assign().
+  _pickImage(path, assign) {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/png,image/jpeg,image/webp';
+    inp.onchange = () => {
+      const f = inp.files && inp.files[0];
+      if (!f) return;
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, 1200 / Math.max(img.width, img.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(img.width * scale);
+        c.height = Math.round(img.height * scale);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        c.toBlob(blob => {
+          if (!blob) return;
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = path.split('/').pop();
+          a.click();
+          const previews = { ...this.state.previews, [path]: c.toDataURL('image/jpeg', 0.8) };
+          this.setState({ previews });
+          assign(path);
+        }, 'image/jpeg', 0.87);
+      };
+      img.src = URL.createObjectURL(f);
+    };
+    inp.click();
+  }
+
+  _upd(fn) {
+    const data = JSON.parse(JSON.stringify(this.state.data || {}));
+    fn(data);
+    this.setState({ data, saved: false });
+  }
+
+  renderVals() {
+    const d = this.state.data || {};
+    const site = d.site || {};
+    const authed = this.state.authed && !!this.state.data;
+
+    const tagFor = (cat) => ({ Festivals: 'FESTIVAL', Galas: 'GALA', Community: 'COMMUNITY', Meetings: 'MEETING' }[cat] || 'EVENT');
+    const photos = this.state.photos;
+    const previews = this.state.previews;
+    const initials = (name) => (name || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || '?';
+    const flags = (item, w, h, round) => {
+      const src = item.photo ? (previews[item.photo] || item.photo) : '';
+      const has = !!(item.photo && (previews[item.photo] || photos[item.photo]));
+      return { hasPhoto: has, noPhoto: !has,
+        photoStyle: has ? { width: w, height: h, borderRadius: round ? '50%' : '8px', border: round ? '2px solid #C9A24B' : 'none', boxSizing: 'border-box', flexShrink: 0, background: '#0E1B31 url("' + src + '") center/cover no-repeat' } : null };
+    };
+
+    const statRows = (d.stats || []).map((s, i) => ({
+      value: s.value, label: s.label,
+      setValue: (e) => this._upd(x => { x.stats[i].value = e.target.value; }),
+      setLabel: (e) => this._upd(x => { x.stats[i].label = e.target.value; })
+    }));
+
+    const execRows = (d.executives || []).map((o, i) => ({
+      office: o.office, name: o.name, duty: o.duty, slotId: o.slotId,
+      ...flags(o, '52px', '52px', true),
+      initials: initials(o.name),
+      pickPhoto: () => {
+        const path = o.photo || ('images/executives/' + (o.slotId || 'officer-' + i).replace(/^exec-/, '') + '.jpg');
+        this._pickImage(path, (p) => this._upd(x => { x.executives[i].photo = p; }));
+      },
+      setName: (e) => this._upd(x => { x.executives[i].name = e.target.value; }),
+      setDuty: (e) => this._upd(x => { x.executives[i].duty = e.target.value; })
+    }));
+
+    const galRows = (d.gallery || []).map((g, i) => ({
+      slotId: g.slotId, title: g.title, date: g.date, cat: g.cat,
+      ...flags(g, '76px', '52px', false),
+      pickPhoto: () => {
+        const path = g.photo || ('images/events/' + (g.slotId || 'event-' + i).replace(/^gal-/, '') + '.jpg');
+        this._pickImage(path, (p) => this._upd(x => { x.gallery[i].photo = p; }));
+      },
+      setTitle: (e) => this._upd(x => { x.gallery[i].title = e.target.value; }),
+      setDate: (e) => this._upd(x => { x.gallery[i].date = e.target.value; }),
+      setCat: (e) => this._upd(x => { x.gallery[i].cat = e.target.value; x.gallery[i].tag = tagFor(e.target.value); }),
+      remove: () => this._upd(x => { x.gallery.splice(i, 1); })
+    }));
+
+    const actRows = (d.activities || []).map((a, i) => ({
+      day: a.day, month: a.month, title: a.title, detail: a.detail,
+      setDay: (e) => this._upd(x => { x.activities[i].day = e.target.value; }),
+      setMonth: (e) => this._upd(x => { x.activities[i].month = e.target.value; }),
+      setTitle: (e) => this._upd(x => { x.activities[i].title = e.target.value; }),
+      setDetail: (e) => this._upd(x => { x.activities[i].detail = e.target.value; }),
+      remove: () => this._upd(x => { x.activities.splice(i, 1); })
+    }));
+
+    const memberRows = (this.state.members || []).map(m => ({
+      name: m.name, email: m.email, phone: m.phone || '—', city: m.city || '—',
+      joined: m.joined ? String(m.joined).slice(0, 10) : '—',
+      remove: () => {
+        if (!confirm('Remove member ' + m.name + ' (' + m.email + ')? This cannot be undone.')) return;
+        import('./neon-db.js').then(db => db.sql('DELETE FROM members WHERE email = $1', [m.email]))
+          .then(() => this._loadMembers())
+          .catch(err => alert('Could not remove: ' + err.message));
+      }
+    }));
+
+    return {
+      memberRows,
+      noMembers: memberRows.length === 0,
+      reloadMembers: () => this._loadMembers(),
+      authed,
+      locked: !authed,
+      saved: this.state.saved,
+      gateError: this.state.gateError,
+      noBridge: authed && !this.state.canWrite,
+
+      unlock: (e) => {
+        e.preventDefault();
+        const pass = new FormData(e.target).get('pass');
+        const expected = (this.state.data && this.state.data.adminPasscode) || 'eko2026';
+        if (pass === expected) {
+          sessionStorage.setItem('eec_admin', '1');
+          this.setState({ authed: true, gateError: '' });
+        } else {
+          this.setState({ gateError: 'Wrong passcode.' });
+        }
+      },
+      lock: () => {
+        sessionStorage.removeItem('eec_admin');
+        this.setState({ authed: false });
+      },
+      save: () => {
+        if (!this._sd || !this.state.data) return;
+        const downloadData = () => {
+          const blob = new Blob([JSON.stringify(this.state.data, null, 2)], { type: 'application/json' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'data.json';
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+        };
+        if (!this.state.canWrite) {
+          downloadData();
+          alert('This host cannot save directly, so data.json has been downloaded instead.\n\nUpload it to your website folder (replacing the old data.json) — along with any downloaded photos into the images/ folders — and your changes will be live.');
+          return;
+        }
+        this._sd.saveSiteData(this.state.data)
+          .then(() => {
+            this.setState({ saved: true });
+            setTimeout(() => this.setState({ saved: false }), 2500);
+          })
+          .catch(() => {
+            downloadData();
+            alert('Saving failed, so data.json has been downloaded instead.\n\nUpload it to your website folder (replacing the old data.json) and your changes will be live.');
+          });
+      },
+      download: () => {
+        const blob = new Blob([JSON.stringify(this.state.data, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'data.json';
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+      },
+
+      siteEmail: site.email || '',
+      siteLocation: site.location || '',
+      siteMeeting: site.meeting || '',
+      setSiteEmail: (e) => this._upd(x => { x.site = x.site || {}; x.site.email = e.target.value; }),
+      setSiteLocation: (e) => this._upd(x => { x.site = x.site || {}; x.site.location = e.target.value; }),
+      setSiteMeeting: (e) => this._upd(x => { x.site = x.site || {}; x.site.meeting = e.target.value; }),
+
+      statRows, execRows, galRows, actRows,
+
+      addEvent: () => this._upd(x => {
+        x.gallery = x.gallery || [];
+        const id = 'gal-custom-' + Date.now();
+        x.gallery.push({ slotId: id, title: 'New Event', date: 'Month Year', tag: 'FESTIVAL', cat: 'Festivals', photo: 'images/events/' + id.replace(/^gal-/, '') + '.jpg' });
+      }),
+      addActivity: () => this._upd(x => {
+        x.activities = x.activities || [];
+        x.activities.push({ day: '01', month: 'JAN', title: 'New Activity', detail: 'Details' });
+      }),
+
+      passcode: d.adminPasscode || 'eko2026',
+      setPasscode: (e) => this._upd(x => { x.adminPasscode = e.target.value; })
+    };
+  }
+}
+</script>
+</body>
+</html>

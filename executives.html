@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F7F3EA}
+body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F7F3EA">
+
+  <!-- HEADER -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
+    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+      <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+        <span style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+          <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
+        </span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px">
+        <a href="index.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Home</a>
+        <a href="about.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">About</a>
+        <a href="executives.html" style="font-size:13.5px;font-weight:700;color:#E5C170;text-decoration:none;letter-spacing:0.05em;border-bottom:2px solid #C9A24B;padding-bottom:3px">Executives</a>
+        <a href="gallery.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Gallery</a>
+        <a href="login.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Member Login</a>
+        <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:13.5px;padding:11px 22px;border-radius:999px;text-decoration:none;letter-spacing:0.04em" style-hover="background:#E5C170">Join the Club</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div data-screen-label="Executives hero" style="background:linear-gradient(160deg,#0B1526,#10203A);color:#F7F3EA">
+    <div style="max-width:1180px;margin:0 auto;padding:76px 32px 64px;display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.3em;color:#C9A24B">LEADERSHIP</span>
+      </div>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:50px;line-height:1.08;margin:0;max-width:22ch;text-wrap:balance">The Executive Council</h1>
+      <p style="font-size:17px;line-height:1.65;color:#B9C4D6;margin:0;max-width:60ch;text-wrap:pretty">Nine offices, elected by members, serving the club and the community. Names below are placeholders — click any name to edit it, and drag officer portraits onto the photo circles.</p>
+    </div>
+  </div>
+
+  <!-- COUNCIL GRID -->
+  <div data-screen-label="Executive council grid" style="max-width:1180px;margin:0 auto;padding:72px 32px 88px;width:100%;box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+      <sc-for list="{{ officers }}" as="o">
+        <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:16px;padding:34px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center" style-hover="border-color:#C9A24B;box-shadow:0 14px 34px rgba(11,21,38,0.09)">
+          <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ o.photoStyle }}"></div>
+          </sc-if>
+          <sc-if value="{{ o.noPhoto }}" hint-placeholder-val="{{ true }}">
+            <span style="width:132px;height:132px;border-radius:50%;background:#0E1B31;border:3px solid #C9A24B;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#E5C170;box-sizing:border-box">{{ o.initials }}</span>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+            <span style="font-size:11px;font-weight:800;letter-spacing:0.24em;color:#A9812F">{{ o.office }}</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;color:#0B1526">{{ o.name }}</span>
+          </div>
+          <p style="font-size:14px;line-height:1.6;color:#5B6577;margin:0;text-wrap:pretty">{{ o.duty }}</p>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:auto">
+            <span style="width:24px;height:1px;background:#E0D5BB"></span>
+            <span style="width:6px;height:6px;background:#C9A24B;transform:rotate(45deg)"></span>
+            <span style="width:24px;height:1px;background:#E0D5BB"></span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B;margin-top:auto">
+    <div style="max-width:1180px;margin:0 auto;padding:56px 32px 0;display:grid;grid-template-columns:1.3fr 0.7fr 1fr;gap:48px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+        </div>
+        <p style="font-size:14px;line-height:1.65;margin:0;max-width:40ch;text-wrap:pretty">Ékò Ilé …Gba Be! A community of Lagos indigenes and friends in Indiana, USA — preserving culture, building bonds, giving back.</p>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.24em;color:#C9A24B">EKO ONI BAJE</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">EXPLORE</span>
+        <a href="about.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">About the club</a>
+        <a href="executives.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Executive council</a>
+        <a href="gallery.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Photo gallery</a>
+        <a href="register.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Become a member</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">CONTACT</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteEmail }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteLocation }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteMeeting }}</span>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:0 auto;padding:24px 32px;margin-top:44px;border-top:1px solid rgba(135,148,168,0.2);display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+      <span>© 2026 Eko Elites Club Inc. All rights reserved.</span>
+      <span style="display:flex;gap:18px;align-items:center"><a href="admin.html" style="color:#8794A8;text-decoration:none;font-weight:600" style-hover="color:#E5C170">Admin</a><span style="letter-spacing:0.12em">ÉKÒ ILÉ …GBA BE!</span></span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null, photos: {} };
+
+  componentDidMount() {
+    import('./site-data.js').then(m => m.loadSiteData().then(data => {
+      const paths = (data.executives || []).map(o => o.photo);
+      return m.probePhotos(paths).then(photos => this.setState({ data, photos }));
+    })).catch(() => {});
+  }
+
+  renderVals() {
+    const defaults = [
+      { office: 'PRESIDENT', slotId: 'exec-president', placeholder: 'President photo', duty: 'Leads the club, presides over meetings, and represents Eko Elites Club Inc. in Indiana and beyond.' },
+      { office: 'VICE PRESIDENT', slotId: 'exec-vice-president', placeholder: 'Vice President photo', duty: 'Supports the president and acts in their stead, coordinating committees and special projects.' },
+      { office: 'GENERAL SECRETARY', slotId: 'exec-secretary', placeholder: 'Secretary photo', duty: 'Keeps records and minutes, handles correspondence, and communicates decisions to members.' },
+      { office: 'TREASURER', slotId: 'exec-treasurer', placeholder: 'Treasurer photo', duty: 'Safeguards club funds, manages the accounts, and reports on the club\u2019s financial position.' },
+      { office: 'FINANCIAL SECRETARY', slotId: 'exec-financial-secretary', placeholder: 'Financial Secretary photo', duty: 'Collects dues and levies, issues receipts, and keeps accurate financial records.' },
+      { office: 'PUBLIC RELATIONS OFFICER', slotId: 'exec-pro', placeholder: 'PRO photo', duty: 'Manages publicity and the club\u2019s public image, and liaises with the press and partner bodies.' },
+      { office: 'SOCIAL SECRETARY', slotId: 'exec-social-secretary', placeholder: 'Social Secretary photo', duty: 'Plans the owambes \u2014 galas, festivals, picnics \u2014 and everything that brings members together.' },
+      { office: 'WELFARE OFFICER', slotId: 'exec-welfare-officer', placeholder: 'Welfare Officer photo', duty: 'Looks after members\u2019 wellbeing, coordinating support through milestones and hardships.' },
+      { office: 'PROVOST', slotId: 'exec-provost', placeholder: 'Provost photo', duty: 'Keeps order at meetings and events, and upholds the club\u2019s code of conduct.' }
+    ].map(o => ({ ...o, name: 'Officer Name' }));
+    const d = this.state.data;
+    const photos = this.state.photos;
+    const list = (d && Array.isArray(d.executives) && d.executives.length) ? d.executives : defaults;
+    const initials = (name) => (name || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || '?';
+    const officers = list.map(o => {
+      const has = !!(o.photo && photos[o.photo]);
+      return { ...o, hasPhoto: has, noPhoto: !has, initials: initials(o.name),
+        photoStyle: has ? { width: '132px', height: '132px', borderRadius: '50%', border: '3px solid #C9A24B', boxSizing: 'border-box', background: '#0E1B31 url("' + o.photo + '") center/cover no-repeat' } : null };
+    });
+    const site = (d && d.site) || {};
+    return {
+      officers,
+      siteEmail: site.email || 'info@ekoelitesclub.org',
+      siteLocation: site.location || 'Indianapolis, Indiana, USA',
+      siteMeeting: site.meeting || 'General meeting: first Sunday of every month'
+    };
+  }
+}
+</script>
+</body>
+</html>

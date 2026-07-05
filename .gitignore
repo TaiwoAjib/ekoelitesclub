@@ -1,0 +1,9 @@
+# Secrets — never commit
+.env
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Node (if dependencies are ever added)
+node_modules/

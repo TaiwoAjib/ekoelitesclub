@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F7F3EA}
+body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F7F3EA">
+
+  <!-- HEADER -->
+  <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
+    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+      <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
+        <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+        <span style="display:flex;flex-direction:column;gap:1px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+          <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
+        </span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:26px">
+        <a href="index.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Home</a>
+        <a href="about.html" style="font-size:13.5px;font-weight:700;color:#E5C170;text-decoration:none;letter-spacing:0.05em;border-bottom:2px solid #C9A24B;padding-bottom:3px">About</a>
+        <a href="executives.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Executives</a>
+        <a href="gallery.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Gallery</a>
+        <a href="login.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Member Login</a>
+        <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:13.5px;padding:11px 22px;border-radius:999px;text-decoration:none;letter-spacing:0.04em" style-hover="background:#E5C170">Join the Club</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div data-screen-label="About hero" style="background:linear-gradient(160deg,#0B1526,#10203A);color:#F7F3EA">
+    <div style="max-width:1180px;margin:0 auto;padding:76px 32px 64px;display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.3em;color:#C9A24B">ABOUT US</span>
+      </div>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:50px;line-height:1.08;margin:0;max-width:22ch;text-wrap:balance">One Lagos family, seven thousand miles from home.</h1>
+      <p style="font-size:17px;line-height:1.65;color:#B9C4D6;margin:0;max-width:60ch;text-wrap:pretty">Ékò Ilé …Gba Be! — Eko Oni Baje. We are Lagosians in Indiana, bound by heritage and committed to each other.</p>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div data-screen-label="History" style="max-width:1180px;margin:0 auto;padding:80px 32px;width:100%;box-sizing:border-box;display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:110px">
+      <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">OUR STORY</span>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:36px;margin:0;color:#0B1526">How it began</h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+      </div>
+      <sc-if value="{{ hasHistoryPhoto }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ historyPhotoStyle }}"></div>
+      </sc-if>
+      <sc-if value="{{ noHistoryPhoto }}" hint-placeholder-val="{{ true }}">
+        <div style="width:100%;height:280px;margin-top:12px;border-radius:16px;background:linear-gradient(150deg,#0E1B31,#152848);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+          <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg)"></span>
+          <span style="font-size:12px;font-weight:700;letter-spacing:0.16em;color:#8794A8">ADD images/history.jpg</span>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;font-size:16.5px;line-height:1.75;color:#3A4456">
+      <p style="margin:0;text-wrap:pretty">Eko Elites Club Inc. was founded by a small circle of Lagos indigenes who found themselves far from the energy of Ékò — the markets of Idumota, the waters of the Lagoon, the sound of fuji at a Saturday owambe — and decided that distance would not dim their heritage.</p>
+      <p style="margin:0;text-wrap:pretty">What began as informal gatherings in living rooms across Indianapolis grew into a registered non-profit organization: a home away from home for sons and daughters of Lagos State, their families, and friends of Lagos across Indiana.</p>
+      <p style="margin:0;text-wrap:pretty">Today the club hosts cultural festivals, monthly general meetings, welfare programs, and community service projects — while sending support back to communities in Lagos State. Our rallying cry says it all: <strong style="color:#0B1526">Eko Oni Baje</strong> — Lagos will not spoil.</p>
+      <p style="margin:0;font-size:13px;color:#8794A8;font-style:italic">This history is placeholder copy — click any paragraph to edit it with your club's real story.</p>
+    </div>
+  </div>
+
+  <!-- MISSION / VISION -->
+  <div data-screen-label="Mission and vision" style="background:#0E1B31">
+    <div style="max-width:1180px;margin:0 auto;padding:76px 32px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div style="border:1px solid rgba(201,162,75,0.4);border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:14px;background:rgba(201,162,75,0.06)">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#C9A24B">OUR MISSION</span>
+        <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:22px;line-height:1.45;color:#F7F3EA;margin:0;text-wrap:pretty">To unite Lagos indigenes in Indiana, preserve and promote Ékò culture, and provide social, welfare, and economic support to our members and communities.</p>
+      </div>
+      <div style="border:1px solid rgba(135,148,168,0.3);border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:14px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#C9A24B">OUR VISION</span>
+        <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:22px;line-height:1.45;color:#F7F3EA;margin:0;text-wrap:pretty">A thriving, generational community where every Lagosian in Indiana finds family — and where Lagos itself feels our positive impact.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div data-screen-label="Values" style="max-width:1180px;margin:0 auto;padding:84px 32px;width:100%;box-sizing:border-box">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;text-align:center">
+      <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">WHAT WE STAND FOR</span>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:38px;margin:0;color:#0B1526">Our values</h2>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+        <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
+        <span style="width:36px;height:1px;background:#C9A24B"></span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center">
+        <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg);margin-bottom:8px"></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Unity</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5B6577;margin:0">One Lagos, one family — regardless of where in Ékò you call home.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center">
+        <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg);margin-bottom:8px"></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Heritage</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5B6577;margin:0">We pass Ékò language, festivals, and traditions to the next generation.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center">
+        <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg);margin-bottom:8px"></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Service</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5B6577;margin:0">We give back — to Indiana communities and to Lagos State.</p>
+      </div>
+      <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:14px;padding:30px 26px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center">
+        <span style="width:10px;height:10px;background:#C9A24B;transform:rotate(45deg);margin-bottom:8px"></span>
+        <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;margin:0;color:#0B1526">Excellence</h3>
+        <p style="font-size:14px;line-height:1.6;color:#5B6577;margin:0">Elites in name and in conduct — we hold ourselves to a high standard.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO CAN JOIN -->
+  <div data-screen-label="Who can join" style="background:#ffffff;border-top:1px solid #E8E1D2">
+    <div style="max-width:1180px;margin:0 auto;padding:80px 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.28em;color:#A9812F">MEMBERSHIP</span>
+        <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:36px;margin:0;color:#0B1526">Who can join?</h2>
+        <p style="font-size:16px;line-height:1.7;color:#3A4456;margin:0;text-wrap:pretty">Membership is open to adults of good character who identify with Lagos State — by birth, marriage, or genuine affinity — and who live in or around Indiana.</p>
+        <a href="register.html" style="background:#C9A24B;color:#0B1526;font-weight:800;font-size:15px;padding:14px 28px;border-radius:999px;text-decoration:none;align-self:flex-start;margin-top:6px" style-hover="background:#E5C170">Apply for Membership</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:14px;align-items:flex-start;background:#FBF9F3;border:1px solid #E8E1D2;border-radius:12px;padding:18px 22px">
+          <span style="width:8px;height:8px;background:#C9A24B;transform:rotate(45deg);margin-top:7px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#3A4456"><strong style="color:#0B1526">Indigenes of Lagos State</strong> — by birth or family lineage.</span>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;background:#FBF9F3;border:1px solid #E8E1D2;border-radius:12px;padding:18px 22px">
+          <span style="width:8px;height:8px;background:#C9A24B;transform:rotate(45deg);margin-top:7px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#3A4456"><strong style="color:#0B1526">Spouses of Lagos indigenes</strong> — married into the Ékò family.</span>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;background:#FBF9F3;border:1px solid #E8E1D2;border-radius:12px;padding:18px 22px">
+          <span style="width:8px;height:8px;background:#C9A24B;transform:rotate(45deg);margin-top:7px;flex-shrink:0"></span>
+          <span style="font-size:15px;line-height:1.6;color:#3A4456"><strong style="color:#0B1526">Friends of Lagos</strong> — long-time residents and lovers of Ékò culture, admitted as associate members.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B;margin-top:auto">
+    <div style="max-width:1180px;margin:0 auto;padding:56px 32px 0;display:grid;grid-template-columns:1.3fr 0.7fr 1fr;gap:48px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:#F7F3EA;letter-spacing:0.04em">EKO ELITES CLUB INC.</span>
+        </div>
+        <p style="font-size:14px;line-height:1.65;margin:0;max-width:40ch;text-wrap:pretty">Ékò Ilé …Gba Be! A community of Lagos indigenes and friends in Indiana, USA — preserving culture, building bonds, giving back.</p>
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.24em;color:#C9A24B">EKO ONI BAJE</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">EXPLORE</span>
+        <a href="about.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">About the club</a>
+        <a href="executives.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Executive council</a>
+        <a href="gallery.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Photo gallery</a>
+        <a href="register.html" style="font-size:14px;color:#8794A8;text-decoration:none" style-hover="color:#E5C170">Become a member</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:12px;font-weight:800;letter-spacing:0.22em;color:#F7F3EA">CONTACT</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteEmail }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteLocation }}</span>
+        <span style="font-size:14px;line-height:1.6">{{ siteMeeting }}</span>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:0 auto;padding:24px 32px;margin-top:44px;border-top:1px solid rgba(135,148,168,0.2);display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+      <span>© 2026 Eko Elites Club Inc. All rights reserved.</span>
+      <span style="display:flex;gap:18px;align-items:center"><a href="admin.html" style="color:#8794A8;text-decoration:none;font-weight:600" style-hover="color:#E5C170">Admin</a><span style="letter-spacing:0.12em">ÉKÒ ILÉ …GBA BE!</span></span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { data: null, photos: {} };
+
+  componentDidMount() {
+    import('./site-data.js').then(m => m.loadSiteData().then(data => {
+      const site = data.site || {};
+      return m.probePhotos([site.historyPhoto]).then(photos => this.setState({ data, photos }));
+    })).catch(() => {});
+  }
+
+  renderVals() {
+    const site = (this.state.data && this.state.data.site) || {};
+    const historyPhoto = site.historyPhoto || 'images/history.jpg';
+    const has = !!this.state.photos[historyPhoto];
+    return {
+      historyPhotoStyle: has ? { width: '100%', height: '280px', borderRadius: '16px', marginTop: '12px', background: '#0E1B31 url("' + historyPhoto + '") center/cover no-repeat' } : null,
+      hasHistoryPhoto: has,
+      noHistoryPhoto: !has,
+      siteEmail: site.email || 'info@ekoelitesclub.org',
+      siteLocation: site.location || 'Indianapolis, Indiana, USA',
+      siteMeeting: site.meeting || 'General meeting: first Sunday of every month'
+    };
+  }
+}
+</script>
+</body>
+</html>

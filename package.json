@@ -1,0 +1,12 @@
+{
+  "name": "eko-elites-club-website",
+  "version": "1.0.0",
+  "description": "Eko Elites Club Inc. membership website — static frontend + built-in database connector",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
