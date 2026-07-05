@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./js/support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -192,7 +192,7 @@ class Component extends DCLogic {
   state = { data: null, photos: {} };
 
   componentDidMount() {
-    import('./site-data.js').then(m => m.loadSiteData().then(data => {
+    import('./js/site-data.js').then(m => m.loadSiteData().then(data => {
       const site = data.site || {};
       return m.probePhotos([site.historyPhoto]).then(photos => this.setState({ data, photos }));
     })).catch(() => {});

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./js/support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -95,19 +95,15 @@ class Component extends DCLogic {
         const d = Object.fromEntries(new FormData(e.target));
         const email = d.email.trim().toLowerCase();
         this.setState({ busy: true, error: '' });
-        import('./neon-db.js').then(async (db) => {
-          await db.ensureTables();
-          const r = await db.sql('SELECT email, pass_hash FROM members WHERE email = $1', [email]);
-          const m = r.rows[0];
-          const hash = await db.sha256(d.password);
-          if (!m || m.pass_hash !== hash) {
-            this.setState({ busy: false, error: 'Email or password not recognized.' });
-            return;
-          }
-          localStorage.setItem('eec_session', m.email);
+        import('./js/api.js').then(api => api.login(email, d.password)).then((r) => {
+          localStorage.setItem('eec_token', r.token);
           window.location.href = 'profile.html';
         }).catch((err) => {
-          this.setState({ busy: false, error: 'Could not reach the membership database. Please try again. (' + err.message + ')' });
+          if (err.status === 401) {
+            this.setState({ busy: false, error: 'Email or password not recognized.' });
+          } else {
+            this.setState({ busy: false, error: 'Could not reach the membership database. Please try again. (' + err.message + ')' });
+          }
         });
       }
     };

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./js/support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -148,22 +148,20 @@ class Component extends DCLogic {
         if (d.password !== d.confirm) { this.setState({ error: 'Passwords do not match.' }); return; }
         const email = d.email.trim().toLowerCase();
         this.setState({ busy: true, error: '' });
-        import('./neon-db.js').then(async (db) => {
-          await db.ensureTables();
-          const existing = await db.sql('SELECT email FROM members WHERE email = $1', [email]);
-          if (existing.rows.length) {
-            this.setState({ busy: false, error: 'An account with this email already exists. Try logging in.' });
-            return;
-          }
-          const hash = await db.sha256(d.password);
-          await db.sql(
-            'INSERT INTO members (email, name, phone, city, connection, pass_hash) VALUES ($1,$2,$3,$4,$5,$6)',
-            [email, d.name.trim(), d.phone.trim(), d.city.trim(), d.connection, hash]
-          );
-          localStorage.setItem('eec_session', email);
+        import('./js/api.js').then(api => api.register({
+          name: d.name.trim(), email, phone: d.phone.trim(), city: d.city.trim(),
+          connection: d.connection, password: d.password
+        })).then((r) => {
+          localStorage.setItem('eec_token', r.token);
           window.location.href = 'profile.html';
         }).catch((err) => {
-          this.setState({ busy: false, error: 'Could not reach the membership database. Please try again. (' + err.message + ')' });
+          if (err.status === 409) {
+            this.setState({ busy: false, error: 'An account with this email already exists. Try logging in.' });
+          } else if (err.status === 400) {
+            this.setState({ busy: false, error: err.message });
+          } else {
+            this.setState({ busy: false, error: 'Could not reach the membership database. Please try again. (' + err.message + ')' });
+          }
         });
       }
     };

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./js/support.js"></script>
 </head>
 <body>
 <x-dc>
@@ -145,17 +145,19 @@ class Component extends DCLogic {
   state = { member: null, checked: false, saved: false, siteData: null };
 
   componentDidMount() {
-    const email = localStorage.getItem('eec_session');
-    if (!email) {
+    const token = localStorage.getItem('eec_token');
+    if (!token) {
       this.setState({ checked: true });
     } else {
-      import('./neon-db.js').then(async (db) => {
-        await db.ensureTables();
-        const r = await db.sql('SELECT * FROM members WHERE email = $1', [email]);
-        this.setState({ member: r.rows[0] || null, checked: true });
-      }).catch(() => this.setState({ checked: true }));
+      import('./js/api.js').then(api => api.getProfile(token)).then((r) => {
+        this.setState({ member: r.member, checked: true });
+      }).catch((err) => {
+        // Expired or invalid session — anything else is a transient error.
+        if (err.status === 401 || err.status === 404) localStorage.removeItem('eec_token');
+        this.setState({ checked: true });
+      });
     }
-    import('./site-data.js').then(m => m.loadSiteData()).then(siteData => this.setState({ siteData })).catch(() => {});
+    import('./js/site-data.js').then(m => m.loadSiteData()).then(siteData => this.setState({ siteData })).catch(() => {});
   }
 
   renderVals() {
@@ -185,18 +187,20 @@ class Component extends DCLogic {
       joined: m ? fmtDate(m.joined) : '',
       activities,
       logout: () => {
-        localStorage.removeItem('eec_session');
+        localStorage.removeItem('eec_token');
         window.location.href = 'login.html';
       },
       save: (e) => {
         e.preventDefault();
         if (!m) return;
         const d = Object.fromEntries(new FormData(e.target));
-        import('./neon-db.js').then(async (db) => {
-          await db.sql('UPDATE members SET phone = $1, city = $2 WHERE email = $3', [d.phone.trim(), d.city.trim(), m.email]);
-          this.setState({ member: { ...m, phone: d.phone.trim(), city: d.city.trim() }, saved: true });
-          setTimeout(() => this.setState({ saved: false }), 2500);
-        }).catch((err) => alert('Could not save: ' + err.message));
+        const token = localStorage.getItem('eec_token');
+        import('./js/api.js').then(api => api.updateProfile(token, { phone: d.phone.trim(), city: d.city.trim() }))
+          .then((r) => {
+            this.setState({ member: r.member, saved: true });
+            setTimeout(() => this.setState({ saved: false }), 2500);
+          })
+          .catch((err) => alert('Could not save: ' + err.message));
       }
     };
   }
