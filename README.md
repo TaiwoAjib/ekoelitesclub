@@ -45,9 +45,21 @@ All write routes require a `Authorization: Bearer <token>` header. Tokens are HM
 | `POST /api/admin/login` | — | Passcode → admin token |
 | `GET /api/admin/members` | admin | List registered members |
 | `DELETE /api/admin/members?email=` | admin | Remove a member |
-| `POST /api/admin/upload?path=` | admin | Save an image under `public/images/` (executive portraits, event photos) |
+| `POST /api/admin/upload?path=` | admin | Store an image (executive portraits, event photos) — see below |
 
 Passwords are hashed server-side with scrypt and a per-user salt. Accounts created by the first version of the site (unsalted SHA-256) still work and are upgraded to scrypt automatically on their next login.
+
+### Image uploads
+
+When an admin picks a photo, it is resized in the browser and sent to
+`POST /api/admin/upload`. The server stores it in the database (`images`
+table) and caches a copy under `public/images/`. Requests for an image
+are served from the disk cache when present, otherwise from the database
+(which also rebuilds the disk cache). Storing the durable copy in the
+database is deliberate: many hosts replace `public/` with the repo copy
+on every deploy, so disk-only uploads would vanish. The `public/images/`
+upload folders are gitignored for the same reason — the database is the
+source of truth.
 
 ## Running locally
 

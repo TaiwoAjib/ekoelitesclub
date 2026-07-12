@@ -7,3 +7,8 @@ Thumbs.db
 
 # Node (if dependencies are ever added)
 node_modules/
+
+# Uploaded photos — the durable copy lives in the database (images table);
+# these on-disk files are just a regenerable cache.
+public/images/executives/
+public/images/events/

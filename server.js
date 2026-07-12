@@ -19,6 +19,7 @@ const path = require('path');
 
 const { PORT, PUBLIC_DIR, DATABASE_URL, ADMIN_PASSCODE } = require('./server/config');
 const api = require('./server/api');
+const imageStore = require('./server/images');
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -51,10 +52,31 @@ const server = http.createServer(async (req, res) => {
   if (rel.startsWith('..') || rel.split(path.sep).some((seg) => seg.startsWith('.'))) {
     res.writeHead(404); res.end('Not found'); return;
   }
-  fs.readFile(filePath, (err, data) => {
-    if (err) { res.writeHead(404); res.end('Not found'); return; }
-    res.writeHead(200, { 'Content-Type': MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream' });
-    res.end(data);
+  fs.readFile(filePath, async (err, data) => {
+    if (!err) {
+      res.writeHead(200, { 'Content-Type': MIME[path.extname(filePath).toLowerCase()] || 'application/octet-stream' });
+      res.end(req.method === 'HEAD' ? undefined : data);
+      return;
+    }
+    // Disk miss: uploaded images live in the database — serve them from
+    // there and re-cache to disk so later requests are fast. This is what
+    // makes uploads survive a redeploy that wipes public/images/.
+    const webPath = rel.split(path.sep).join('/');
+    if (webPath.startsWith('images/')) {
+      try {
+        const img = await imageStore.getImage(webPath);
+        if (img) {
+          try {
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, img.buffer);
+          } catch (e) { /* cache write is optional */ }
+          res.writeHead(200, { 'Content-Type': img.contentType, 'Cache-Control': 'public, max-age=300' });
+          res.end(req.method === 'HEAD' ? undefined : img.buffer);
+          return;
+        }
+      } catch (e) { /* fall through to 404 */ }
+    }
+    res.writeHead(404); res.end('Not found');
   });
 });
 

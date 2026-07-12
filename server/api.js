@@ -17,8 +17,11 @@ const fs = require('fs');
 const path = require('path');
 const { query, ensureSchema } = require('./db');
 const auth = require('./auth');
+const imageStore = require('./images');
 const DEFAULTS = require('./site-defaults');
 const { ADMIN_PASSCODE, PUBLIC_DIR } = require('./config');
+
+const IMAGE_TYPES = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 
 const MEMBER_TTL = 30 * 24 * 60 * 60 * 1000; // 30 days
 const ADMIN_TTL = 12 * 60 * 60 * 1000;       // 12 hours
@@ -185,9 +188,9 @@ async function adminDeleteMember(req, res, searchParams) {
   json(res, 200, { ok: true });
 }
 
-// Saves an uploaded image (raw request body) under public/images/ so the
-// executives, gallery, and home pages can display it. Only image
-// extensions, only inside images/ — no traversal.
+// Saves an uploaded image (raw request body) into the database so the
+// executives, gallery, and home pages can display it, and caches a copy
+// on disk. Only image extensions, only inside images/ — no traversal.
 const MAX_UPLOAD = 8 * 1024 * 1024; // 8 MB
 const UPLOAD_PATH_RE = /^images\/[A-Za-z0-9][A-Za-z0-9 _./-]*\.(jpg|jpeg|png|webp)$/i;
 
@@ -217,8 +220,16 @@ async function adminUpload(req, res, searchParams) {
   }
   const body = await readRawBody(req, MAX_UPLOAD);
   if (!body.length) return json(res, 400, { message: 'Empty upload' });
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, body);
+  const contentType = IMAGE_TYPES[path.extname(rel).toLowerCase()] || 'application/octet-stream';
+
+  // The database is the durable store (survives redeploys); disk is a
+  // best-effort cache and must not fail the upload if it is read-only.
+  await imageStore.saveImage(rel, contentType, body);
+  try {
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, body);
+  } catch (e) { /* disk cache is optional */ }
+
   json(res, 200, { ok: true, path: rel, bytes: body.length });
 }
 
