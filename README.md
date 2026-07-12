@@ -17,6 +17,7 @@ public/                   Everything the browser is allowed to see
   about.html              Club history and mission
   executives.html         Executive officers and duties
   gallery.html            Event photo gallery
+  calendar.html           Year-long programme of activities
   register.html           Member sign-up
   login.html              Member login
   profile.html            Member dashboard

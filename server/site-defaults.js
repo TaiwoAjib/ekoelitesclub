@@ -42,5 +42,25 @@ module.exports = {
     { day: '02', month: 'AUG', title: 'General Meeting', detail: 'First Sunday of the month · Indianapolis' },
     { day: '15', month: 'AUG', title: 'Eyo Cultural Day', detail: 'Family-friendly festival with music, food, and dance' },
     { day: '03', month: 'OCT', title: 'Independence Gala', detail: 'Nigeria @ 66 black-tie gala · tickets at the meeting' }
-  ]
+  ],
+  // The year-long programme of activities and initiatives, shown on the
+  // Calendar page and editable in the admin panel. `status` is either
+  // 'Completed' or 'Upcoming'; `category' drives the colour tag.
+  calendar: {
+    year: 2026,
+    programs: [
+      { month: 'JAN', date: 'Sun, Jan 4', title: 'Executive Inauguration & New Year Meeting', category: 'Meeting', status: 'Completed', detail: 'Swearing-in of the new executive council and the first general meeting of the year.' },
+      { month: 'FEB', date: 'Sat, Feb 14', title: 'Membership Drive & Welcome Social', category: 'Community', status: 'Completed', detail: 'Welcoming new members and reconnecting the Ékò family after the holidays.' },
+      { month: 'MAR', date: 'Sat, Mar 21', title: 'Ìdílé Family & Culture Day', category: 'Festival', status: 'Completed', detail: 'A family day of Lagos food, language, and games for all generations.' },
+      { month: 'APR', date: 'Sat, Apr 18', title: 'Charity Health Walk', category: 'Community', status: 'Completed', detail: 'A community walk raising funds for a chosen health cause in Indiana and Lagos.' },
+      { month: 'MAY', date: 'Sat, May 23', title: 'Eyo Cultural Day', category: 'Festival', status: 'Completed', detail: 'Our flagship Eyo-inspired festival of music, masquerade, and heritage.' },
+      { month: 'JUN', date: 'Sun, Jun 7', title: 'Mid-Year General Meeting & Financial Review', category: 'Meeting', status: 'Completed', detail: 'Progress review, financial report to members, and second-half planning.' },
+      { month: 'JUL', date: 'Sat, Jul 25', title: 'Summer Picnic & Games', category: 'Community', status: 'Upcoming', detail: 'A family picnic with games, grilling, and music to mark the summer.' },
+      { month: 'AUG', date: 'Sat, Aug 22', title: 'Back-to-School Support Drive', category: 'Welfare', status: 'Upcoming', detail: 'Collecting and distributing school supplies for members’ children and partner schools.' },
+      { month: 'SEP', date: 'Sun, Sep 6', title: 'Independence Anniversary Planning Meeting', category: 'Meeting', status: 'Upcoming', detail: 'Finalising plans and committees for the Independence Gala.' },
+      { month: 'OCT', date: 'Sat, Oct 3', title: 'Nigeria Independence Gala Night', category: 'Gala', status: 'Upcoming', detail: 'Black-tie celebration of Nigeria’s independence with dinner, awards, and dancing.' },
+      { month: 'NOV', date: 'Sat, Nov 21', title: 'Community Thanksgiving & Outreach', category: 'Community', status: 'Upcoming', detail: 'Giving back through a food drive and outreach to families in need.' },
+      { month: 'DEC', date: 'Sat, Dec 19', title: 'End-of-Year Awards & Christmas Party', category: 'Gala', status: 'Upcoming', detail: 'Celebrating the year, honouring members, and closing with our Christmas party.' }
+    ]
+  }
 };
