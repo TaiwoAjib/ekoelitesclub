@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/responsive.css">
 <style>
 html,body{margin:0;padding:0;background:#F7F3EA}
 body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
@@ -21,7 +22,7 @@ body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#
 
   <!-- HEADER -->
   <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
-    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+    <div class="ee-bar" style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
       <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
         <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
         <span style="display:flex;flex-direction:column;gap:1px">
@@ -29,7 +30,7 @@ body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#
           <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
         </span>
       </a>
-      <nav style="display:flex;align-items:center;gap:26px">
+      <nav class="ee-nav" style="display:flex;align-items:center;gap:26px">
         <a href="index.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Home</a>
         <a href="about.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">About</a>
         <a href="executives.html" style="font-size:13.5px;font-weight:700;color:#E5C170;text-decoration:none;letter-spacing:0.05em;border-bottom:2px solid #C9A24B;padding-bottom:3px">Executives</a>
@@ -47,14 +48,14 @@ body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#
         <span style="width:7px;height:7px;background:#C9A24B;transform:rotate(45deg)"></span>
         <span style="font-size:12px;font-weight:800;letter-spacing:0.3em;color:#C9A24B">LEADERSHIP</span>
       </div>
-      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:50px;line-height:1.08;margin:0;max-width:22ch;text-wrap:balance">The Executive Council</h1>
+      <h1 class="ee-h1" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:50px;line-height:1.08;margin:0;max-width:22ch;text-wrap:balance">The Executive Council</h1>
       <p style="font-size:17px;line-height:1.65;color:#B9C4D6;margin:0;max-width:60ch;text-wrap:pretty">Nine offices, elected by members, serving the club and the community. Names below are placeholders — click any name to edit it, and drag officer portraits onto the photo circles.</p>
     </div>
   </div>
 
   <!-- COUNCIL GRID -->
   <div data-screen-label="Executive council grid" style="max-width:1180px;margin:0 auto;padding:72px 32px 88px;width:100%;box-sizing:border-box">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+    <div class="ee-grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
       <sc-for list="{{ officers }}" as="o">
         <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:16px;padding:34px 28px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center" style-hover="border-color:#C9A24B;box-shadow:0 14px 34px rgba(11,21,38,0.09)">
           <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}">
@@ -80,7 +81,7 @@ body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#
 
   <!-- FOOTER -->
   <div style="background:#080F1D;color:#8794A8;border-top:3px solid #C9A24B;margin-top:auto">
-    <div style="max-width:1180px;margin:0 auto;padding:56px 32px 0;display:grid;grid-template-columns:1.3fr 0.7fr 1fr;gap:48px">
+    <div class="ee-footer" style="max-width:1180px;margin:0 auto;padding:56px 32px 0;display:grid;grid-template-columns:1.3fr 0.7fr 1fr;gap:48px">
       <div style="display:flex;flex-direction:column;gap:16px">
         <div style="display:flex;align-items:center;gap:12px">
           <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
@@ -103,7 +104,7 @@ body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#
         <span style="font-size:14px;line-height:1.6">{{ siteMeeting }}</span>
       </div>
     </div>
-    <div style="max-width:1180px;margin:0 auto;padding:24px 32px;margin-top:44px;border-top:1px solid rgba(135,148,168,0.2);display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
+    <div class="ee-foot-bottom" style="max-width:1180px;margin:0 auto;padding:24px 32px;margin-top:44px;border-top:1px solid rgba(135,148,168,0.2);display:flex;justify-content:space-between;gap:16px;font-size:12.5px">
       <span>© 2026 Eko Elites Club Inc. All rights reserved.</span>
       <span style="display:flex;gap:18px;align-items:center"><a href="admin.html" style="color:#8794A8;text-decoration:none;font-weight:600" style-hover="color:#E5C170">Admin</a><span style="letter-spacing:0.12em">ÉKÒ ILÉ …GBA BE!</span></span>
     </div>

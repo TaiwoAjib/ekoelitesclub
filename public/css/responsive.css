@@ -1,0 +1,59 @@
+/* Responsive overrides for the Eko Elites Club site.
+   The pages use inline styles (which beat normal stylesheet rules), so
+   these mobile rules use !important to win. The ee-* hooks are added to
+   the relevant containers in each page's HTML. Desktop layout is
+   unchanged; these only take effect at narrow widths. */
+
+img { max-width: 100%; }
+
+/* ---- Tablet and below ---- */
+@media (max-width: 860px) {
+  body { overflow-x: hidden; }
+
+  /* Header: let the logo and nav stack instead of overflowing */
+  .ee-bar {
+    height: auto !important;
+    flex-wrap: wrap !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    row-gap: 10px !important;
+  }
+  .ee-nav {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px 18px !important;
+  }
+
+  /* Two-column content splits stack */
+  .ee-split { grid-template-columns: 1fr !important; gap: 40px !important; }
+
+  /* Card grids drop to two across */
+  .ee-grid4 { grid-template-columns: repeat(2, 1fr) !important; }
+  .ee-grid3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .ee-footer { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+
+  /* Admin editor rows (fixed pixel columns) stack */
+  .ee-rows { grid-template-columns: 1fr !important; gap: 12px !important; }
+
+  /* Decorative hero graphic is dropped to save space */
+  .ee-hero-visual { display: none !important; }
+
+  /* Oversized display headings shrink fluidly */
+  .ee-h1 { font-size: clamp(30px, 7vw, 44px) !important; }
+}
+
+/* ---- Phones ---- */
+@media (max-width: 560px) {
+  .ee-grid4, .ee-grid3, .ee-grid2 { grid-template-columns: 1fr !important; }
+  .ee-footer { grid-template-columns: 1fr !important; }
+  .ee-foot-bottom { flex-direction: column !important; align-items: flex-start !important; }
+
+  .ee-h2 { font-size: clamp(24px, 6vw, 32px) !important; }
+
+  /* Fixed-width cards become full-width */
+  .ee-card { width: 100% !important; max-width: 440px !important; padding: 32px !important; }
+
+  /* Large split-panel padding tightens up */
+  .ee-pad { padding: 44px 24px !important; }
+}

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/responsive.css">
 <style>
 html,body{margin:0;padding:0;background:#F7F3EA}
 body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
@@ -22,7 +23,7 @@ input{font-family:'Manrope',sans-serif}
 
   <!-- HEADER -->
   <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
-    <div style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
+    <div class="ee-bar" style="max-width:1180px;margin:0 auto;padding:0 32px;height:78px;display:flex;align-items:center;gap:16px">
       <a href="index.html" style="display:flex;align-items:center;gap:13px;text-decoration:none;margin-right:auto">
         <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
         <span style="display:flex;flex-direction:column;gap:1px">
@@ -30,7 +31,7 @@ input{font-family:'Manrope',sans-serif}
           <span style="font-size:10px;color:#C9A24B;letter-spacing:0.26em;font-weight:700">INDIANA · USA</span>
         </span>
       </a>
-      <nav style="display:flex;align-items:center;gap:26px">
+      <nav class="ee-nav" style="display:flex;align-items:center;gap:26px">
         <a href="index.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Home</a>
         <a href="about.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">About</a>
         <a href="executives.html" style="font-size:13.5px;font-weight:600;color:#C9D4E6;text-decoration:none;letter-spacing:0.05em" style-hover="color:#E5C170">Executives</a>
@@ -44,7 +45,7 @@ input{font-family:'Manrope',sans-serif}
   <!-- NOT LOGGED IN -->
   <sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ false }}">
     <div data-screen-label="Not logged in" style="flex:1;display:flex;align-items:center;justify-content:center;padding:80px 32px">
-      <div style="background:#ffffff;border:1px solid #E8E1D2;border-top:4px solid #C9A24B;border-radius:20px;padding:52px;width:420px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
+      <div class="ee-card" style="background:#ffffff;border:1px solid #E8E1D2;border-top:4px solid #C9A24B;border-radius:20px;padding:52px;width:420px;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center">
         <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid #C9A24B;background:#ffffff"/>
         <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;margin:0;color:#0B1526">Members only</h1>
         <p style="font-size:15px;line-height:1.6;color:#5B6577;margin:0">Log in to view your member dashboard, update your details, and see upcoming activities.</p>
@@ -72,7 +73,7 @@ input{font-family:'Manrope',sans-serif}
         </div>
       </div>
 
-      <div style="max-width:1180px;margin:0 auto;padding:56px 32px 80px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:start;box-sizing:border-box">
+      <div class="ee-split" style="max-width:1180px;margin:0 auto;padding:56px 32px 80px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:start;box-sizing:border-box">
 
         <!-- Details + edit -->
         <div style="background:#ffffff;border:1px solid #E8E1D2;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:24px">
@@ -82,7 +83,7 @@ input{font-family:'Manrope',sans-serif}
               <span style="background:#E9F3EC;border:1px solid #B9D8C4;color:#1F6B3C;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:999px">Saved ✓</span>
             </sc-if>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div class="ee-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
             <div style="display:flex;flex-direction:column;gap:5px">
               <span style="font-size:11px;font-weight:800;letter-spacing:0.16em;color:#8794A8">FULL NAME</span>
               <span style="font-size:15.5px;font-weight:700;color:#0B1526">{{ name }}</span>
@@ -94,7 +95,7 @@ input{font-family:'Manrope',sans-serif}
           </div>
           <div style="height:1px;background:#EEE8D9"></div>
           <form onSubmit="{{ save }}" style="display:flex;flex-direction:column;gap:18px">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="ee-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
               <label style="display:flex;flex-direction:column;gap:7px">
                 <span style="font-size:12px;font-weight:800;letter-spacing:0.14em;color:#3A4456">PHONE</span>
                 <input name="phone" defaultValue="{{ phone }}" placeholder="(317) 555-0100" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:15px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>

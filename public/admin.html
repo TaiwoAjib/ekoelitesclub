@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/responsive.css">
 <style>
 html,body{margin:0;padding:0;background:#EFEADF}
 body{font-family:'Manrope',sans-serif;-webkit-font-smoothing:antialiased;color:#17202F}
@@ -22,7 +23,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
 
   <!-- ADMIN TOP BAR -->
   <div style="position:sticky;top:0;z-index:50;background:rgba(11,21,38,0.97);border-bottom:1px solid rgba(201,162,75,0.4)">
-    <div style="max-width:1080px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;gap:14px">
+    <div class="ee-bar" style="max-width:1080px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;gap:14px">
       <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;margin-right:auto">
         <img src="images/logo.jpg" alt="Eko Elites Club crest" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #C9A24B;background:#ffffff"/>
         <span style="display:flex;flex-direction:column;gap:1px">
@@ -75,7 +76,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Club info</h2>
             <p style="font-size:13.5px;color:#8794A8;margin:0">Shown in the footer of every page.</p>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="ee-grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
             <label style="display:flex;flex-direction:column;gap:7px">
               <span style="font-size:11.5px;font-weight:800;letter-spacing:0.14em;color:#3A4456">CONTACT EMAIL</span>
               <input value="{{ siteEmail }}" onChange="{{ setSiteEmail }}" style="border:1px solid #D8CEB8;border-radius:10px;padding:12px 15px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
@@ -99,7 +100,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </div>
           <div style="display:flex;flex-direction:column;gap:12px">
             <sc-for list="{{ statRows }}" as="s" hint-placeholder-count="4">
-              <div style="display:grid;grid-template-columns:140px 1fr;gap:12px">
+              <div class="ee-rows" style="display:grid;grid-template-columns:140px 1fr;gap:12px">
                 <input value="{{ s.value }}" onChange="{{ s.setValue }}" placeholder="120+" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
                 <input value="{{ s.label }}" onChange="{{ s.setLabel }}" placeholder="ACTIVE MEMBERS" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;background:#FBF9F3;color:#17202F;outline:none;letter-spacing:0.06em" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
               </div>
@@ -115,7 +116,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </div>
           <div style="display:flex;flex-direction:column;gap:14px">
             <sc-for list="{{ execRows }}" as="o">
-              <div style="display:grid;grid-template-columns:150px 170px 1fr 1.4fr;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+              <div class="ee-rows" style="display:grid;grid-template-columns:150px 170px 1fr 1.4fr;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
                 <div style="display:flex;align-items:center;gap:10px">
                   <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}">
                     <div style="{{ o.photoStyle }}"></div>
@@ -144,7 +145,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </div>
           <div style="display:flex;flex-direction:column;gap:14px">
             <sc-for list="{{ galRows }}" as="g">
-              <div style="display:grid;grid-template-columns:160px 1.2fr 0.8fr 0.8fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+              <div class="ee-rows" style="display:grid;grid-template-columns:160px 1.2fr 0.8fr 0.8fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
                 <div style="display:flex;align-items:center;gap:10px">
                   <sc-if value="{{ g.hasPhoto }}" hint-placeholder-val="{{ false }}">
                     <div style="{{ g.photoStyle }}"></div>
@@ -179,7 +180,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </div>
           <div style="display:flex;flex-direction:column;gap:14px">
             <sc-for list="{{ actRows }}" as="a" hint-placeholder-count="3">
-              <div style="display:grid;grid-template-columns:70px 80px 1fr 1.4fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+              <div class="ee-rows" style="display:grid;grid-template-columns:70px 80px 1fr 1.4fr 36px;gap:14px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
                 <input value="{{ a.day }}" onChange="{{ a.setDay }}" placeholder="02" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 10px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none;text-align:center" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
                 <input value="{{ a.month }}" onChange="{{ a.setMonth }}" placeholder="AUG" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 10px;font-size:13.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none;text-align:center;letter-spacing:0.08em" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
                 <input value="{{ a.title }}" onChange="{{ a.setTitle }}" placeholder="Event title" style="border:1px solid #D8CEB8;border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;background:#FBF9F3;color:#17202F;outline:none" style-focus="border-color:#C9A24B;box-shadow:0 0 0 3px rgba(201,162,75,0.18)"/>
@@ -204,7 +205,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </sc-if>
           <div style="display:flex;flex-direction:column;gap:10px">
             <sc-for list="{{ memberRows }}" as="m">
-              <div style="display:grid;grid-template-columns:1.2fr 1.4fr 0.9fr 0.9fr 0.7fr 36px;gap:12px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
+              <div class="ee-rows" style="display:grid;grid-template-columns:1.2fr 1.4fr 0.9fr 0.9fr 0.7fr 36px;gap:12px;align-items:center;border:1px solid #EEE8D9;border-radius:12px;padding:12px 16px">
                 <span style="font-size:14px;font-weight:800;color:#0B1526">{{ m.name }}</span>
                 <span style="font-size:13px;color:#5B6577;overflow:hidden;text-overflow:ellipsis">{{ m.email }}</span>
                 <span style="font-size:13px;color:#5B6577">{{ m.phone }}</span>
