@@ -45,6 +45,7 @@ All write routes require a `Authorization: Bearer <token>` header. Tokens are HM
 | `POST /api/admin/login` | — | Passcode → admin token |
 | `GET /api/admin/members` | admin | List registered members |
 | `DELETE /api/admin/members?email=` | admin | Remove a member |
+| `POST /api/admin/upload?path=` | admin | Save an image under `public/images/` (executive portraits, event photos) |
 
 Passwords are hashed server-side with scrypt and a per-user salt. Accounts created by the first version of the site (unsalted SHA-256) still work and are upgraded to scrypt automatically on their next login.
 

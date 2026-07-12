@@ -11,11 +11,14 @@
 //   POST   /api/admin/login            passcode → admin token
 //   GET    /api/admin/members          list members             (admin)
 //   DELETE /api/admin/members?email=   remove a member          (admin)
+//   POST   /api/admin/upload?path=     save an image file       (admin)
 
+const fs = require('fs');
+const path = require('path');
 const { query, ensureSchema } = require('./db');
 const auth = require('./auth');
 const DEFAULTS = require('./site-defaults');
-const { ADMIN_PASSCODE } = require('./config');
+const { ADMIN_PASSCODE, PUBLIC_DIR } = require('./config');
 
 const MEMBER_TTL = 30 * 24 * 60 * 60 * 1000; // 30 days
 const ADMIN_TTL = 12 * 60 * 60 * 1000;       // 12 hours
@@ -182,6 +185,43 @@ async function adminDeleteMember(req, res, searchParams) {
   json(res, 200, { ok: true });
 }
 
+// Saves an uploaded image (raw request body) under public/images/ so the
+// executives, gallery, and home pages can display it. Only image
+// extensions, only inside images/ — no traversal.
+const MAX_UPLOAD = 8 * 1024 * 1024; // 8 MB
+const UPLOAD_PATH_RE = /^images\/[A-Za-z0-9][A-Za-z0-9 _./-]*\.(jpg|jpeg|png|webp)$/i;
+
+function readRawBody(req, limit) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on('data', (c) => {
+      size += c.length;
+      if (size > limit) { reject(new Error('Upload too large (max 8 MB)')); req.destroy(); return; }
+      chunks.push(c);
+    });
+    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('error', reject);
+  });
+}
+
+async function adminUpload(req, res, searchParams) {
+  if (!requireRole(req, res, 'admin')) return;
+  const rel = String(searchParams.get('path') || '');
+  if (!UPLOAD_PATH_RE.test(rel) || rel.includes('..')) {
+    return json(res, 400, { message: 'Invalid image path' });
+  }
+  const dest = path.normalize(path.join(PUBLIC_DIR, rel));
+  if (!dest.startsWith(path.join(PUBLIC_DIR, 'images') + path.sep)) {
+    return json(res, 400, { message: 'Invalid image path' });
+  }
+  const body = await readRawBody(req, MAX_UPLOAD);
+  if (!body.length) return json(res, 400, { message: 'Empty upload' });
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, body);
+  json(res, 200, { ok: true, path: rel, bytes: body.length });
+}
+
 // ── Router ──────────────────────────────────────────────────
 
 const ROUTES = {
@@ -193,7 +233,8 @@ const ROUTES = {
   'PUT /api/me': updateMe,
   'POST /api/admin/login': adminLogin,
   'GET /api/admin/members': adminMembers,
-  'DELETE /api/admin/members': adminDeleteMember
+  'DELETE /api/admin/members': adminDeleteMember,
+  'POST /api/admin/upload': adminUpload
 };
 
 // Handles /api/* requests. Returns true if the URL was an API route.

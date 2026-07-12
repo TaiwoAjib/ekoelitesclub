@@ -111,7 +111,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
         <div style="background:#ffffff;border:1px solid #E0D5BB;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:20px">
           <div style="display:flex;flex-direction:column;gap:4px">
             <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Executive council</h2>
-            <p style="font-size:13.5px;color:#8794A8;margin:0">Names, duties, and portraits. Click <strong>Photo</strong> to prepare a portrait — a web-ready copy downloads with the correct filename; upload it to the <code>images/executives/</code> folder on your website.</p>
+            <p style="font-size:13.5px;color:#8794A8;margin:0">Names, duties, and portraits. Click <strong>Photo</strong> to choose a portrait — it is resized and saved to the website automatically, then shown on the home and executives pages.</p>
           </div>
           <div style="display:flex;flex-direction:column;gap:14px">
             <sc-for list="{{ execRows }}" as="o">
@@ -138,7 +138,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
             <div style="display:flex;flex-direction:column;gap:4px">
               <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;margin:0;color:#0B1526">Gallery events</h2>
-              <p style="font-size:13.5px;color:#8794A8;margin:0">Click <strong>Photo</strong> to prepare an event image — it downloads with the correct filename; upload it to <code>images/events/</code> on your website. Add or remove events below.</p>
+              <p style="font-size:13.5px;color:#8794A8;margin:0">Click <strong>Photo</strong> to choose an event image — it is resized and saved to the website automatically, then shown in the gallery and on the home page. Add or remove events below.</p>
             </div>
             <button onClick="{{ addEvent }}" style="background:#0B1526;color:#E5C170;font-weight:800;font-size:13px;padding:11px 20px;border-radius:999px;border:none;cursor:pointer;white-space:nowrap" style-hover="background:#152848">+ Add event</button>
           </div>
@@ -224,7 +224,7 @@ input,select,button,textarea{font-family:'Manrope',sans-serif}
           </div>
         </div>
 
-        <p style="font-size:12.5px;color:#8794A8;margin:0;line-height:1.6;text-align:center">Text changes save straight to the club database when you click <strong>Save Changes</strong>. Photos still download to your computer — upload them to the <code>images/</code> folders on your website.</p>
+        <p style="font-size:12.5px;color:#8794A8;margin:0;line-height:1.6;text-align:center">Text changes save straight to the club database when you click <strong>Save Changes</strong>. Photos are saved to the website's <code>images/</code> folders the moment you pick them — click <strong>Save Changes</strong> afterwards so every page links to the new photo.</p>
       </div>
     </div>
   </sc-if>
@@ -276,8 +276,9 @@ class Component extends DCLogic {
     }).catch(() => {});
   }
 
-  // Resize to max 1200px, encode as JPEG, download it with the right
-  // filename, remember a local preview, and record the path via assign().
+  // Resize to max 1200px, encode as JPEG, upload it straight into the
+  // website's images/ folder, remember a local preview, and record the
+  // path via assign(). The pages display it from that path immediately.
   _pickImage(path, assign) {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -294,13 +295,14 @@ class Component extends DCLogic {
         c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
         c.toBlob(blob => {
           if (!blob) return;
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = path.split('/').pop();
-          a.click();
-          const previews = { ...this.state.previews, [path]: c.toDataURL('image/jpeg', 0.8) };
-          this.setState({ previews });
-          assign(path);
+          import('/js/api.js').then(api => api.uploadImage(this._token(), path, blob))
+            .then(() => {
+              const previews = { ...this.state.previews, [path]: c.toDataURL('image/jpeg', 0.8) };
+              const photos = { ...this.state.photos, [path]: true };
+              this.setState({ previews, photos });
+              assign(path);
+            })
+            .catch(err => alert('Could not upload the photo: ' + err.message));
         }, 'image/jpeg', 0.87);
       };
       img.src = URL.createObjectURL(f);

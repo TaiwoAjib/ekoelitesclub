@@ -37,3 +37,21 @@ export const adminLogin = (passcode) => request('POST', '/api/admin/login', { pa
 export const adminMembers = (token) => request('GET', '/api/admin/members', undefined, token);
 export const adminDeleteMember = (token, email) =>
   request('DELETE', '/api/admin/members?email=' + encodeURIComponent(email), undefined, token);
+
+// Saves an image file (Blob) into the website's images/ folder so it
+// shows up wherever that path is linked. Admin only.
+export async function uploadImage(token, imagePath, blob) {
+  const r = await fetch('/api/admin/upload?path=' + encodeURIComponent(imagePath), {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/octet-stream' },
+    body: blob
+  });
+  let json = null;
+  try { json = await r.json(); } catch (e) { /* non-JSON error body */ }
+  if (!r.ok) {
+    const err = new Error((json && json.message) || 'Upload failed (' + r.status + ')');
+    err.status = r.status;
+    throw err;
+  }
+  return json;
+}
