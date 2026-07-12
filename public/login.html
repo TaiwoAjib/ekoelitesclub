@@ -95,7 +95,7 @@ class Component extends DCLogic {
         const d = Object.fromEntries(new FormData(e.target));
         const email = d.email.trim().toLowerCase();
         this.setState({ busy: true, error: '' });
-        import('./js/api.js').then(api => api.login(email, d.password)).then((r) => {
+        import('/js/api.js').then(api => api.login(email, d.password)).then((r) => {
           localStorage.setItem('eec_token', r.token);
           window.location.href = 'profile.html';
         }).catch((err) => {

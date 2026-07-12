@@ -226,7 +226,7 @@ class Component extends DCLogic {
   state = { data: null, photos: {} };
 
   componentDidMount() {
-    import('./js/site-data.js').then(m => m.loadSiteData().then(data => {
+    import('/js/site-data.js').then(m => m.loadSiteData().then(data => {
       const paths = []
         .concat((data.executives || []).map(o => o.photo))
         .concat((data.gallery || []).map(g => g.photo));

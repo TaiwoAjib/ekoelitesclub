@@ -249,7 +249,7 @@ class Component extends DCLogic {
 
   _loadMembers() {
     if (!this._token()) return;
-    import('./js/api.js').then(api => api.adminMembers(this._token()))
+    import('/js/api.js').then(api => api.adminMembers(this._token()))
       .then(r => this.setState({ members: r.members || [] }))
       .catch((err) => {
         // Expired admin session — drop back to the passcode gate.
@@ -261,7 +261,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    import('./js/site-data.js').then(m => {
+    import('/js/site-data.js').then(m => {
       this._sd = m;
       this.setState({ canWrite: m.canSave() });
       return m.loadSiteData().then(data => {
@@ -375,7 +375,7 @@ class Component extends DCLogic {
       joined: m.joined ? String(m.joined).slice(0, 10) : '—',
       remove: () => {
         if (!confirm('Remove member ' + m.name + ' (' + m.email + ')? This cannot be undone.')) return;
-        import('./js/api.js').then(api => api.adminDeleteMember(this._token(), m.email))
+        import('/js/api.js').then(api => api.adminDeleteMember(this._token(), m.email))
           .then(() => this._loadMembers())
           .catch(err => alert('Could not remove: ' + err.message));
       }
@@ -394,7 +394,7 @@ class Component extends DCLogic {
       unlock: (e) => {
         e.preventDefault();
         const pass = new FormData(e.target).get('pass');
-        import('./js/api.js').then(api => api.adminLogin(pass))
+        import('/js/api.js').then(api => api.adminLogin(pass))
           .then((r) => {
             sessionStorage.setItem('eec_admin_token', r.token);
             this.setState({ authed: true, gateError: '' });
