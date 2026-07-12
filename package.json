@@ -4,7 +4,8 @@
   "description": "Eko Elites Club Inc. membership website — static frontend + fixed JSON API over Neon Postgres",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node scripts/seed.js"
   },
   "engines": {
     "node": ">=18"
