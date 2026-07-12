@@ -68,6 +68,12 @@ Requires Node.js 18+. No `npm install` needed.
 
 3. Open http://localhost:3000 — the admin page is at `/admin.html`.
 
+4. Optional: `npm run seed` populates the database with the default site
+   content and 8 sample member accounts (`@example.com` addresses,
+   password `Welcome@123`). It never overwrites existing rows, so it is
+   safe to run at any time; remove the samples from the admin page when
+   real members sign up.
+
 The startup log tells you whether the database and admin passcode are configured.
 
 ## Deploying
