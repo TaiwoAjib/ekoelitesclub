@@ -37,7 +37,7 @@ All write routes require a `Authorization: Bearer <token>` header. Tokens are HM
 
 | Method & path | Auth | Purpose |
 |---|---|---|
-| `GET /api/site-data` | — | Site content (stats, executives, gallery, activities) |
+| `GET /api/site-data` | — | Site content (stats, executives, gallery, activities, calendar) |
 | `PUT /api/site-data` | admin | Save site content |
 | `POST /api/auth/register` | — | Create a member account → `{ token, member }` |
 | `POST /api/auth/login` | — | Member login → `{ token, member }` |
@@ -61,6 +61,47 @@ database is deliberate: many hosts replace `public/` with the repo copy
 on every deploy, so disk-only uploads would vanish. The `public/images/`
 upload folders are gitignored for the same reason — the database is the
 source of truth.
+
+## Using the website
+
+### Member accounts (login & profile)
+
+Members create their own accounts — no admin action is needed.
+
+1. **Register.** From any page, click **Join the Club** (or open `/register.html`). Fill in name, email, phone, city, and Lagos connection, and choose a password (minimum 6 characters). On success the member is signed in and taken to their dashboard.
+2. **Log in.** Click **Member Login** (or open `/login.html`) and enter the registered email and password.
+3. **Profile dashboard** (`/profile.html`). Signed-in members can see their details and the upcoming activities, and can update their **phone** and **city**. Name and email are fixed.
+4. **Log out.** Use the **Log Out** button in the header on the profile page.
+
+Notes:
+- Sessions last **30 days**, stored as a signed token in the browser (`localStorage`), so members stay logged in across visits until it expires or they log out.
+- Passwords are hashed on the server (scrypt + per-user salt); they are never stored or transmitted in plain text.
+- There is **no self-service password reset** yet. If a member forgets their password, an admin can remove the account from the admin page and ask them to register again, or a reset flow can be added later.
+
+### Admin management
+
+The admin page is where all public site content is edited. It is protected by a passcode that lives only on the server (`ADMIN_PASSCODE` in `.env`), never in the website files.
+
+1. **Open `/admin.html`** (there is also an **Admin** link in the footer of every page).
+2. **Enter the admin passcode.** A correct passcode signs you in for **12 hours**; after that you'll be asked again. Use **Lock** (top-right) to sign out immediately.
+
+From the panels you can edit:
+
+- **Club info** — contact email, location, and meeting note shown in the footer of every page.
+- **Homepage stats** — the four figures under the homepage hero (e.g. active members, established year).
+- **Executive council** — each officer's name and duty, plus their **portrait** (click **Photo**).
+- **Gallery events** — add, edit, or remove events and set each event's **photo**.
+- **Upcoming activities** — the short list shown on the member dashboard.
+- **Yearly calendar** — set the year and add/edit/remove the year's programmes (month, date, title, description, category, and Completed/Upcoming status). This drives the public **Calendar** page.
+- **Registered members** — view everyone who has signed up, **Refresh** the list, or remove a member.
+
+How saving works:
+
+- **Photos save immediately** when you pick them — they are uploaded to the website (stored in the database and cached on disk) and appear wherever they're linked. After adding photos, still click **Save Changes** so the content that references them is saved too.
+- **Text and settings** (everything except photos) are saved to the database only when you click **Save Changes**. A **Saved ✓** badge confirms it.
+- **Download data.json** exports the current content as a backup file. If the database is ever unreachable, saving falls back to downloading this file.
+
+Changing the admin passcode: edit `ADMIN_PASSCODE` in the server's `.env` file (or the host's environment settings) and restart the server. It is deliberately not editable from the web page.
 
 ## Running locally
 

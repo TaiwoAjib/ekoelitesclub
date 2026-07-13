@@ -12,7 +12,7 @@ module.exports = {
   },
   stats: [
     { value: '120+', label: 'ACTIVE MEMBERS' },
-    { value: '2018', label: 'ESTABLISHED' },
+    { value: '2021', label: 'ESTABLISHED' },
     { value: '30+', label: 'EVENTS HOSTED' },
     { value: '9', label: 'EXECUTIVE OFFICES' }
   ],
